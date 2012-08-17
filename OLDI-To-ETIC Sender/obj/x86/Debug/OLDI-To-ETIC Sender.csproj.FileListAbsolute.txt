@@ -1,0 +1,19 @@
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\bin\Debug\OLDI-To-ETIC Sender.exe
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\bin\Debug\OLDI-To-ETIC Sender.pdb
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\OLDI_To_ETIC_Sender.MainForm.resources
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\OLDI_To_ETIC_Sender.Properties.Resources.resources
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\OLDI-To-ETIC Sender.exe
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\OLDI-To-ETIC Sender.pdb
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\OLDI_To_ETIC_Sender.Settings.resources
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\OLDI_To_ETIC_Sender.About.resources
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\OLDI_To_ETIC_Sender.Help.resources
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\bin\Debug\OLDI-To-ETIC Sender.exe.config
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\bin\Debug\OLDI-To-ETIC Sender.exe.manifest
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\bin\Debug\OLDI-To-ETIC Sender.application
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\OLDI-To-ETIC Sender.exe.manifest
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\OLDI-To-ETIC Sender.application
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\bhdca\documents\visual studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
