@@ -72,6 +72,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.lblDataDirectory = new System.Windows.Forms.Label();
             this.checkBoxResetFields = new System.Windows.Forms.CheckBox();
+            this.forwarderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabABI.SuspendLayout();
             this.tabPageACT.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -401,7 +402,8 @@
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.modifyToolStripMenuItem,
-            this.importDataToolStripMenuItem});
+            this.importDataToolStripMenuItem,
+            this.forwarderToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -446,14 +448,14 @@
             // viewHelpToolStripMenuItem
             // 
             this.viewHelpToolStripMenuItem.Name = "viewHelpToolStripMenuItem";
-            this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.viewHelpToolStripMenuItem.Text = "View Help";
             this.viewHelpToolStripMenuItem.Click += new System.EventHandler(this.viewHelpToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -541,6 +543,13 @@
             this.checkBoxResetFields.Text = "Reset fields after send";
             this.checkBoxResetFields.UseVisualStyleBackColor = true;
             // 
+            // forwarderToolStripMenuItem
+            // 
+            this.forwarderToolStripMenuItem.Name = "forwarderToolStripMenuItem";
+            this.forwarderToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.forwarderToolStripMenuItem.Text = "Forwarder";
+            this.forwarderToolStripMenuItem.Click += new System.EventHandler(this.forwarderToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -618,6 +627,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblDataDirectory;
         private System.Windows.Forms.CheckBox checkBoxResetFields;
+        private System.Windows.Forms.ToolStripMenuItem forwarderToolStripMenuItem;
     }
 }
 

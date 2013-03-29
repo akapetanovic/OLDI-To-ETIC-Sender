@@ -13,6 +13,8 @@ namespace OLDI_To_ETIC_Sender
 {
     public partial class MainForm : Form
     {
+        private static Auto_Forwarder My_Forwarder = new Auto_Forwarder();
+
         public MainForm()
         {
             InitializeComponent();
@@ -121,6 +123,10 @@ namespace OLDI_To_ETIC_Sender
             this.comboBoxTypeofFlight.SelectedIndex = 0;
             this.comboBoxFLAtCOP.SelectedIndex = 20;
             UpdateSettingParametersDisplay();
+
+            My_Forwarder.Show();
+            My_Forwarder.Visible = false;
+           
         }
 
         private void UpdateSettingParametersDisplay()
@@ -386,6 +392,11 @@ namespace OLDI_To_ETIC_Sender
         private void comboBoxACNumandtype_TextChanged(object sender, EventArgs e)
         {
             HandleSendButtonEnabledStatus();
+        }
+
+        private void forwarderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            My_Forwarder.Visible = true;
         }
     }
 }
