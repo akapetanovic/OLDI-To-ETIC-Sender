@@ -101,6 +101,12 @@
     </Compile>
     <Compile Include="OLDI Forwarder\Bit_Ops.cs" />
     <Compile Include="OLDI Forwarder\FMTP_Parser.cs" />
+    <Compile Include="OLDI Forwarder\FormOldiPartners.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OLDI Forwarder\FormOldiPartners.Designer.cs">
+      <DependentUpon>FormOldiPartners.cs</DependentUpon>
+    </Compile>
     <Compile Include="OLDI Forwarder\IPHeader.cs" />
     <Compile Include="OLDI Forwarder\DNSHeader.cs" />
     <Compile Include="OLDI Forwarder\TCPHeader.cs" />
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Help.resx">
       <DependentUpon>Help.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OLDI Forwarder\FormOldiPartners.resx">
+      <DependentUpon>FormOldiPartners.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

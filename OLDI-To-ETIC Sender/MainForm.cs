@@ -404,5 +404,10 @@ namespace OLDI_To_ETIC_Sender
         {
             My_Forwarder.Visible = true;
         }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

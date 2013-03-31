@@ -60,6 +60,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.forwarderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +73,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.lblDataDirectory = new System.Windows.Forms.Label();
             this.checkBoxResetFields = new System.Windows.Forms.CheckBox();
-            this.forwarderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabABI.SuspendLayout();
             this.tabPageACT.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -407,6 +407,7 @@
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
@@ -436,6 +437,13 @@
             this.importDataToolStripMenuItem.Text = "Import Data";
             this.importDataToolStripMenuItem.Click += new System.EventHandler(this.importDataToolStripMenuItem_Click);
             // 
+            // forwarderToolStripMenuItem
+            // 
+            this.forwarderToolStripMenuItem.Name = "forwarderToolStripMenuItem";
+            this.forwarderToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.forwarderToolStripMenuItem.Text = "Forwarder";
+            this.forwarderToolStripMenuItem.Click += new System.EventHandler(this.forwarderToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -448,14 +456,14 @@
             // viewHelpToolStripMenuItem
             // 
             this.viewHelpToolStripMenuItem.Name = "viewHelpToolStripMenuItem";
-            this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.viewHelpToolStripMenuItem.Text = "View Help";
             this.viewHelpToolStripMenuItem.Click += new System.EventHandler(this.viewHelpToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -542,13 +550,6 @@
             this.checkBoxResetFields.TabIndex = 10;
             this.checkBoxResetFields.Text = "Reset fields after send";
             this.checkBoxResetFields.UseVisualStyleBackColor = true;
-            // 
-            // forwarderToolStripMenuItem
-            // 
-            this.forwarderToolStripMenuItem.Name = "forwarderToolStripMenuItem";
-            this.forwarderToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.forwarderToolStripMenuItem.Text = "Forwarder";
-            this.forwarderToolStripMenuItem.Click += new System.EventHandler(this.forwarderToolStripMenuItem_Click);
             // 
             // MainForm
             // 

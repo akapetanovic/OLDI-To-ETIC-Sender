@@ -15,15 +15,15 @@ namespace OLDI_To_ETIC_Sender
             public string reserved = "";
             public string msg_length = "";
             public Message_Type msg_type = Message_Type.System;
-            public  string msg_content = "";
-            public bool Valid_FMTP_Data = false;
+            public string msg_content = "";
+            public bool Valid_FMTP_Data = true;
         }
 
-        public static FMPT_Header_and_Data FMTP_Msg_Parser (byte[] FMTP_Msh)
+        public static FMPT_Header_and_Data FMTP_Msg_Parser(byte[] FMTP_Msh)
         {
             FMPT_Header_and_Data Data_Out = new FMPT_Header_and_Data();
 
-           // Determine FMTP version
+            // Determine FMTP version
             Data_Out.version = FMTP_Msh[0].ToString();
 
             // Determine message size
@@ -33,8 +33,8 @@ namespace OLDI_To_ETIC_Sender
             int Result = BO.DWord[Bit_Ops.Bits0_15_Of_DWord];
             Data_Out.msg_length = Result.ToString();
             if (Result == 0)
-            Data_Out.Valid_FMTP_Data = false;
-            
+                Data_Out.Valid_FMTP_Data = false;
+
             // Determine message type
             switch ((int)FMTP_Msh[4])
             {
@@ -54,6 +54,9 @@ namespace OLDI_To_ETIC_Sender
                     Data_Out.Valid_FMTP_Data = false;
                     break;
             }
+
+            if (Data_Out.Valid_FMTP_Data)
+                Data_Out.msg_content = Data_Out.msg_content + System.Text.Encoding.ASCII.GetString(FMTP_Msh, 5, Result - 1);
 
             return Data_Out;
         }

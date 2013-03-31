@@ -21,6 +21,10 @@ namespace OLDI_To_ETIC_Sender
 
         private delegate void AddTreeNode(TreeNode node);
 
+        string Local_Interface_Address;
+        string Partner_IP;
+        string Partner_Port;
+
         public Auto_Forwarder()
         {
             InitializeComponent();
@@ -29,8 +33,32 @@ namespace OLDI_To_ETIC_Sender
         private void Auto_Forwarder_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
-            textBoxPartnerAddress.Text = Properties.Settings.Default.PartnerIP;
-            textBoxPortNumber.Text = Properties.Settings.Default.PartnerPort;
+
+            if (Properties.Settings.Default.P_ID3.Length > 0 && Properties.Settings.Default.P_ADDR3.Length > 0 && Properties.Settings.Default.P_PORT3.Length > 0)
+            {
+                this.comboBoxP_ID.Items.Add(Properties.Settings.Default.P_ID3);
+                this.comboBoxPartnerIP.Items.Add(Properties.Settings.Default.P_ADDR3);
+                this.comboBoxP_Port.Items.Add(Properties.Settings.Default.P_PORT3);
+            }
+            if (Properties.Settings.Default.P_ID2.Length > 0 && Properties.Settings.Default.P_ADDR2.Length > 0 && Properties.Settings.Default.P_PORT2.Length > 0)
+            {
+                this.comboBoxP_ID.Items.Add(Properties.Settings.Default.P_ID2);
+                this.comboBoxPartnerIP.Items.Add(Properties.Settings.Default.P_ADDR2);
+                this.comboBoxP_Port.Items.Add(Properties.Settings.Default.P_PORT2);
+            }
+            if (Properties.Settings.Default.P_ID1.Length > 0 && Properties.Settings.Default.P_ADDR1.Length > 0 && Properties.Settings.Default.P_PORT1.Length > 0)
+            {
+                this.comboBoxP_ID.Items.Add(Properties.Settings.Default.P_ID1);
+                this.comboBoxPartnerIP.Items.Add(Properties.Settings.Default.P_ADDR1);
+                this.comboBoxP_Port.Items.Add(Properties.Settings.Default.P_PORT1);
+            }
+
+            if (this.comboBoxP_ID.Items.Count > 0)
+            {
+                this.comboBoxP_ID.SelectedIndex = 0;
+                this.comboBoxPartnerIP.SelectedIndex = 0;
+                this.comboBoxP_Port.SelectedIndex = 0;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -144,27 +172,35 @@ namespace OLDI_To_ETIC_Sender
 
             bool Process = true;
             bool OLDI_Check_Requested = false;
+            bool Inhibit_Due_To_Not_Valid_FMTP = false;
+            IPAddress Partner_Address = IPAddress.Parse(this.comboBoxPartnerIP.Text);
 
             ////////////////////////////////////////////////////////////////////////////
             // Here check if OLDI partner IP address and Port number have been defined
             // If so then check that only applicable OLDI data is processed and rest ignored.
             // If no data is provided then process all data
-            if ((textBoxPartnerAddress.Text.Length > 0) && (textBoxPortNumber.Text.Length > 0))
+            if ((this.comboBoxPartnerIP.Text.Length > 0) && (this.comboBoxP_Port.Text.Length > 0))
             {
                 Process = false;
                 OLDI_Check_Requested = true;
 
-                IPAddress Partner_Address = IPAddress.Parse(textBoxPartnerAddress.Text);
-                // Here we can check that address is from the expected source
-                if ((ipHeader.ProtocolType == Protocol.TCP) && (Partner_Address.ToString() == ipHeader.SourceAddress.ToString()))
+                // First check if this is TCP
+                if ((ipHeader.ProtocolType == Protocol.TCP))
                 {
-                    Process = true;
+                    // Only process data going between two partners
+                    if ((Local_Interface_Address == ipHeader.SourceAddress.ToString()) && (Partner_Address.ToString() == ipHeader.DestinationAddress.ToString()))
+                    {
+                        Process = true;
+                    }
+                    else if ((Partner_Address.ToString() == ipHeader.SourceAddress.ToString()) && (Local_Interface_Address.ToString() == ipHeader.DestinationAddress.ToString()))
+                    {
+                        Process = true;
+                    }
                 }
             }
 
             if (Process)
             {
-
                 if (OLDI_Check_Requested == false)
                 {
                     TreeNode ipNode = MakeIPTreeNode(ipHeader);
@@ -180,15 +216,26 @@ namespace OLDI_To_ETIC_Sender
                         TCPHeader tcpHeader = new TCPHeader(ipHeader.Data,//IPHeader.Data stores the data being carried by the IP datagram
                                                             ipHeader.MessageLength);//Length of the data field 
 
-                        if ((OLDI_Check_Requested == true) && (tcpHeader.SourcePort == textBoxPortNumber.Text))
+                        bool Incomming_OLDI = ((tcpHeader.DestinationPort == this.comboBoxP_Port.Text) && (Partner_Address.ToString() == ipHeader.SourceAddress.ToString()));
+                        bool Outgoing_OLDI = ((tcpHeader.SourcePort == this.comboBoxP_Port.Text) && (Local_Interface_Address.ToString() == ipHeader.SourceAddress.ToString()));
+
+                        if (OLDI_Check_Requested && (Incomming_OLDI || Outgoing_OLDI))
                         {
-                            TreeNode tcpNode = MakeTCPTreeNode(tcpHeader, OLDI_Check_Requested);
-                            rootNode.Nodes.Add(tcpNode);
+                            FMTP_Parser.FMPT_Header_and_Data Parsed_Msg = FMTP_Parser.FMTP_Msg_Parser(tcpHeader.Data);
+
+                            if (Parsed_Msg.Valid_FMTP_Data == false)
+                            {
+                                Inhibit_Due_To_Not_Valid_FMTP = true;
+                            }
+                            else
+                            {
+                                TreeNode tcpNode = MakeTCPTreeNode(tcpHeader, OLDI_Check_Requested, Parsed_Msg);
+                                rootNode.Nodes.Add(tcpNode);
+                            }
                         }
                         else if (OLDI_Check_Requested == false)
                         {
-                            TreeNode tcpNode = MakeTCPTreeNode(tcpHeader, OLDI_Check_Requested);
-
+                            TreeNode tcpNode = MakeTCPTreeNode(tcpHeader, OLDI_Check_Requested, new FMTP_Parser.FMPT_Header_and_Data());
                             rootNode.Nodes.Add(tcpNode);
 
                             //If the port is equal to 53 then the underlying protocol is DNS
@@ -198,6 +245,10 @@ namespace OLDI_To_ETIC_Sender
                                 TreeNode dnsNode = MakeDNSTreeNode(tcpHeader.Data, (int)tcpHeader.MessageLength);
                                 rootNode.Nodes.Add(dnsNode);
                             }
+                        }
+                        else
+                        {
+                            Inhibit_Due_To_Not_Valid_FMTP = true;
                         }
 
                         break;
@@ -230,12 +281,15 @@ namespace OLDI_To_ETIC_Sender
                         break;
                 }
 
-                AddTreeNode addTreeNode = new AddTreeNode(OnAddTreeNode);
-                string Date_Time = DateTime.Now.ToShortDateString() + " / " + DateTime.Now.ToLongTimeString();
-                rootNode.Text = Date_Time + ": " + ipHeader.SourceAddress.ToString() + " to " +
-                    ipHeader.DestinationAddress.ToString();
-                //Thread safe adding of the nodes
-                treeView.Invoke(addTreeNode, new object[] { rootNode });
+                if (Inhibit_Due_To_Not_Valid_FMTP == false)
+                {
+                    AddTreeNode addTreeNode = new AddTreeNode(OnAddTreeNode);
+                    string Date_Time = DateTime.Now.ToShortDateString() + " / " + DateTime.Now.ToLongTimeString();
+                    rootNode.Text = Date_Time + ": " + ipHeader.SourceAddress.ToString() + "  ->  " +
+                        ipHeader.DestinationAddress.ToString();
+                    //Thread safe adding of the nodes
+                    treeView.Invoke(addTreeNode, new object[] { rootNode });
+                }
             }
         }
 
@@ -275,7 +329,7 @@ namespace OLDI_To_ETIC_Sender
 
         //Helper function which returns the information contained in the TCP header as a
         //tree node
-        private TreeNode MakeTCPTreeNode(TCPHeader tcpHeader, bool OLDI_Data)
+        private TreeNode MakeTCPTreeNode(TCPHeader tcpHeader, bool OLDI_Data, FMTP_Parser.FMPT_Header_and_Data Parsed_Msg)
         {
             TreeNode tcpNode = new TreeNode();
 
@@ -300,19 +354,11 @@ namespace OLDI_To_ETIC_Sender
             }
             else
             {
-                /////////////////////////////////////////////////////////////////////////////////////////////////
-                // This code handles OLDI data display
-                //
-                FMTP_Parser.FMPT_Header_and_Data Parsed_Msg = FMTP_Parser.FMTP_Msg_Parser(tcpHeader.Data);
-
-                if (Parsed_Msg.Valid_FMTP_Data)
-                {
-                    tcpNode.Text = "OLDI";
-                    tcpNode.Nodes.Add("Msg Version: " + Parsed_Msg.version);
-                    tcpNode.Nodes.Add("Msg Length: " + Parsed_Msg.msg_length + " bytes");
-                    tcpNode.Nodes.Add("Msg Type: " + Parsed_Msg.msg_type);
-                    tcpNode.Nodes.Add("Msg Content: " + Parsed_Msg.msg_content);
-                }
+                tcpNode.Text = "OLDI";
+                tcpNode.Nodes.Add("Msg Version: " + Parsed_Msg.version);
+                tcpNode.Nodes.Add("Msg Length: " + Parsed_Msg.msg_length + " bytes");
+                tcpNode.Nodes.Add("Msg Type: " + Parsed_Msg.msg_type);
+                tcpNode.Nodes.Add("Msg Content: " + Parsed_Msg.msg_content);
             }
 
             return tcpNode;
@@ -376,10 +422,64 @@ namespace OLDI_To_ETIC_Sender
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.PartnerIP = textBoxPartnerAddress.Text;
-            Properties.Settings.Default.PartnerPort = textBoxPortNumber.Text;
+
             Properties.Settings.Default.Save();
             this.Visible = false;
+        }
+
+        private void comboBoxNetworkInterface_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Local_Interface_Address = comboBoxNetworkInterface.Text;
+        }
+
+        private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            treeView.ExpandAll();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            treeView.CollapseAll();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxPartnerAddress_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxPortNumber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxPartnerIP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

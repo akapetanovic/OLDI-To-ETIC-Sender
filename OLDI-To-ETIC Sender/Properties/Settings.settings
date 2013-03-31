@@ -2,10 +2,31 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="OLDI_To_ETIC_Sender.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="PartnerIP" Type="System.String" Scope="User">
+    <Setting Name="P_ID1" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="PartnerPort" Type="System.String" Scope="User">
+    <Setting Name="P_ID2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="P_ID3" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="P_ADDR1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="P_ADDR2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="P_ADDR3" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="P_PORT1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="P_PORT2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="P_PORT3" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>
