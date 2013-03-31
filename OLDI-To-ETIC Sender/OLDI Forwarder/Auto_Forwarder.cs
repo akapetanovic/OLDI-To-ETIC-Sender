@@ -144,6 +144,7 @@ namespace OLDI_To_ETIC_Sender
 
             bool Process = true;
             bool OLDI_Check_Requested = false;
+
             ////////////////////////////////////////////////////////////////////////////
             // Here check if OLDI partner IP address and Port number have been defined
             // If so then check that only applicable OLDI data is processed and rest ignored.
@@ -154,7 +155,7 @@ namespace OLDI_To_ETIC_Sender
                 OLDI_Check_Requested = true;
 
                 IPAddress Partner_Address = IPAddress.Parse(textBoxPartnerAddress.Text);
-                // Here we can check that this TCP and source address is actually from the expected source
+                // Here we can check that address is from the expected source
                 if ((ipHeader.ProtocolType == Protocol.TCP) && (Partner_Address.ToString() == ipHeader.SourceAddress.ToString()))
                 {
                     Process = true;
@@ -176,11 +177,15 @@ namespace OLDI_To_ETIC_Sender
                 {
                     case Protocol.TCP:
 
-                        TCPHeader tcpHeader = new TCPHeader(ipHeader.Data,              //IPHeader.Data stores the data being 
-                            //carried by the IP datagram
+                        TCPHeader tcpHeader = new TCPHeader(ipHeader.Data,//IPHeader.Data stores the data being carried by the IP datagram
                                                             ipHeader.MessageLength);//Length of the data field 
 
-                        if ((OLDI_Check_Requested == false) || (tcpHeader.SourcePort == textBoxPortNumber.Text))
+                        if ((OLDI_Check_Requested == true) && (tcpHeader.SourcePort == textBoxPortNumber.Text))
+                        {
+                            TreeNode tcpNode = MakeTCPTreeNode(tcpHeader, OLDI_Check_Requested);
+                            rootNode.Nodes.Add(tcpNode);
+                        }
+                        else if (OLDI_Check_Requested == false)
                         {
                             TreeNode tcpNode = MakeTCPTreeNode(tcpHeader, OLDI_Check_Requested);
 
@@ -226,12 +231,9 @@ namespace OLDI_To_ETIC_Sender
                 }
 
                 AddTreeNode addTreeNode = new AddTreeNode(OnAddTreeNode);
-
                 string Date_Time = DateTime.Now.ToShortDateString() + " / " + DateTime.Now.ToLongTimeString();
-
                 rootNode.Text = Date_Time + ": " + ipHeader.SourceAddress.ToString() + " to " +
                     ipHeader.DestinationAddress.ToString();
-
                 //Thread safe adding of the nodes
                 treeView.Invoke(addTreeNode, new object[] { rootNode });
             }
@@ -301,14 +303,16 @@ namespace OLDI_To_ETIC_Sender
                 /////////////////////////////////////////////////////////////////////////////////////////////////
                 // This code handles OLDI data display
                 //
-                
-                tcpNode.Text = "OLDI";
                 FMTP_Parser.FMPT_Header_and_Data Parsed_Msg = FMTP_Parser.FMTP_Msg_Parser(tcpHeader.Data);
 
-                tcpNode.Nodes.Add("Msg Version: " + Parsed_Msg.version);
-                tcpNode.Nodes.Add("Msg Length: " + Parsed_Msg.msg_length + " bytes");
-                tcpNode.Nodes.Add("Msg Type: " + Parsed_Msg.msg_type);
-                tcpNode.Nodes.Add("Msg Content: " + Parsed_Msg.msg_content);
+                if (Parsed_Msg.Valid_FMTP_Data)
+                {
+                    tcpNode.Text = "OLDI";
+                    tcpNode.Nodes.Add("Msg Version: " + Parsed_Msg.version);
+                    tcpNode.Nodes.Add("Msg Length: " + Parsed_Msg.msg_length + " bytes");
+                    tcpNode.Nodes.Add("Msg Type: " + Parsed_Msg.msg_type);
+                    tcpNode.Nodes.Add("Msg Content: " + Parsed_Msg.msg_content);
+                }
             }
 
             return tcpNode;
