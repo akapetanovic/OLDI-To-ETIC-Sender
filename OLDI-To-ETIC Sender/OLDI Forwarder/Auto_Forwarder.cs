@@ -34,6 +34,15 @@ namespace OLDI_To_ETIC_Sender
         {
             this.ControlBox = false;
 
+            LoadOLDIPartners();
+        }
+
+        private void LoadOLDIPartners()
+        {
+            this.comboBoxP_ID.Items.Clear();
+            this.comboBoxPartnerIP.Items.Clear();
+            this.comboBoxP_Port.Items.Clear();
+
             if (Properties.Settings.Default.P_ID3.Length > 0 && Properties.Settings.Default.P_ADDR3.Length > 0 && Properties.Settings.Default.P_PORT3.Length > 0)
             {
                 this.comboBoxP_ID.Items.Add(Properties.Settings.Default.P_ID3);
@@ -173,13 +182,13 @@ namespace OLDI_To_ETIC_Sender
             bool Process = true;
             bool OLDI_Check_Requested = false;
             bool Inhibit_Due_To_Not_Valid_FMTP = false;
-            IPAddress Partner_Address = IPAddress.Parse(this.comboBoxPartnerIP.Text);
+            IPAddress Partner_Address = IPAddress.Parse(Partner_IP);
 
             ////////////////////////////////////////////////////////////////////////////
             // Here check if OLDI partner IP address and Port number have been defined
             // If so then check that only applicable OLDI data is processed and rest ignored.
             // If no data is provided then process all data
-            if ((this.comboBoxPartnerIP.Text.Length > 0) && (this.comboBoxP_Port.Text.Length > 0))
+            if ((Partner_IP.Length > 0) && (Partner_Port.Length > 0))
             {
                 Process = false;
                 OLDI_Check_Requested = true;
@@ -216,10 +225,9 @@ namespace OLDI_To_ETIC_Sender
                         TCPHeader tcpHeader = new TCPHeader(ipHeader.Data,//IPHeader.Data stores the data being carried by the IP datagram
                                                             ipHeader.MessageLength);//Length of the data field 
 
-                        bool Incomming_OLDI = ((tcpHeader.DestinationPort == this.comboBoxP_Port.Text) && (Partner_Address.ToString() == ipHeader.SourceAddress.ToString()));
-                        bool Outgoing_OLDI = ((tcpHeader.SourcePort == this.comboBoxP_Port.Text) && (Local_Interface_Address.ToString() == ipHeader.SourceAddress.ToString()));
+                        bool Is_OLDI = ((tcpHeader.DestinationPort == Partner_Port) || (tcpHeader.SourcePort == Partner_Port));
 
-                        if (OLDI_Check_Requested && (Incomming_OLDI || Outgoing_OLDI))
+                        if (OLDI_Check_Requested && Is_OLDI)
                         {
                             FMTP_Parser.FMPT_Header_and_Data Parsed_Msg = FMTP_Parser.FMTP_Msg_Parser(tcpHeader.Data);
 
@@ -479,7 +487,40 @@ namespace OLDI_To_ETIC_Sender
 
         private void comboBoxPartnerIP_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.comboBoxP_Port.SelectedIndex = this.comboBoxPartnerIP.SelectedIndex;
+            this.comboBoxP_ID.SelectedIndex = this.comboBoxPartnerIP.SelectedIndex;
 
+            Partner_IP = this.comboBoxPartnerIP.Text;
+            Partner_Port = this.comboBoxP_Port.Text;
+        }
+
+        private void partnersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OldiPartners Partners = new OldiPartners();
+            Partners.Show();
+        }
+
+        private void comboBoxPartnerIP_Click(object sender, EventArgs e)
+        {
+            LoadOLDIPartners();
+        }
+
+        private void comboBoxP_Port_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.comboBoxP_ID.SelectedIndex = this.comboBoxP_Port.SelectedIndex;
+            this.comboBoxPartnerIP.SelectedIndex = this.comboBoxP_Port.SelectedIndex;
+
+            Partner_IP = this.comboBoxPartnerIP.Text;
+            Partner_Port = this.comboBoxP_Port.Text;
+        }
+
+        private void comboBoxP_ID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.comboBoxP_Port.SelectedIndex = this.comboBoxP_ID.SelectedIndex;
+            this.comboBoxPartnerIP.SelectedIndex = this.comboBoxP_ID.SelectedIndex;
+
+            Partner_IP = this.comboBoxPartnerIP.Text;
+            Partner_Port = this.comboBoxP_Port.Text;
         }
     }
 }

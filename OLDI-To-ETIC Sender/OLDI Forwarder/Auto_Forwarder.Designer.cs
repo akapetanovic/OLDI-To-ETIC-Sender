@@ -99,7 +99,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(389, 639);
+            this.button2.Location = new System.Drawing.Point(475, 639);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 32;
@@ -171,8 +171,9 @@
             // partnersToolStripMenuItem
             // 
             this.partnersToolStripMenuItem.Name = "partnersToolStripMenuItem";
-            this.partnersToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.partnersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.partnersToolStripMenuItem.Text = "Partners";
+            this.partnersToolStripMenuItem.Click += new System.EventHandler(this.partnersToolStripMenuItem_Click);
             // 
             // comboBoxPartnerIP
             // 
@@ -182,6 +183,7 @@
             this.comboBoxPartnerIP.Size = new System.Drawing.Size(188, 21);
             this.comboBoxPartnerIP.TabIndex = 38;
             this.comboBoxPartnerIP.SelectedIndexChanged += new System.EventHandler(this.comboBoxPartnerIP_SelectedIndexChanged);
+            this.comboBoxPartnerIP.Click += new System.EventHandler(this.comboBoxPartnerIP_Click);
             // 
             // comboBoxP_Port
             // 
@@ -190,6 +192,7 @@
             this.comboBoxP_Port.Name = "comboBoxP_Port";
             this.comboBoxP_Port.Size = new System.Drawing.Size(77, 21);
             this.comboBoxP_Port.TabIndex = 39;
+            this.comboBoxP_Port.SelectedIndexChanged += new System.EventHandler(this.comboBoxP_Port_SelectedIndexChanged);
             // 
             // comboBoxP_ID
             // 
@@ -198,6 +201,7 @@
             this.comboBoxP_ID.Name = "comboBoxP_ID";
             this.comboBoxP_ID.Size = new System.Drawing.Size(66, 21);
             this.comboBoxP_ID.TabIndex = 40;
+            this.comboBoxP_ID.SelectedIndexChanged += new System.EventHandler(this.comboBoxP_ID_SelectedIndexChanged);
             // 
             // label4
             // 

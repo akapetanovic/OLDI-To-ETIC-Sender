@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace OLDI_To_ETIC_Sender.OLDI_Forwarder
+namespace OLDI_To_ETIC_Sender
 {
     public partial class OldiPartners : Form
     {

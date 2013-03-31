@@ -1,4 +1,4 @@
-﻿namespace OLDI_To_ETIC_Sender.OLDI_Forwarder
+﻿namespace OLDI_To_ETIC_Sender
 {
     partial class OldiPartners
     {
