@@ -57,24 +57,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OLDI-To-ETIC Sender.exe" size="36352">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OLDI-To-ETIC Sender.exe" size="48128">
       <assemblyIdentity name="OLDI-To-ETIC Sender" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Q7x2KvgW50VycFfJTRphM6z1/Q0=</dsig:DigestValue>
+        <dsig:DigestValue>Wj2cIdIg3R7bneh/a5I6cEXzB8Y=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="OLDI-To-ETIC Sender.exe.config" size="130">
+  <file name="OLDI-To-ETIC Sender.exe.config" size="975">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>f2RL4w+aTZsMBqqpM8m2SPVP7oY=</dsig:DigestValue>
+      <dsig:DigestValue>y1jhvjQvaFoPQJpUoEU4VlqyXAQ=</dsig:DigestValue>
     </hash>
   </file>
   <file name="README.txt" size="1825">

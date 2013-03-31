@@ -35,3 +35,21 @@ C:\Users\AMER\Documents\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86
 C:\Users\AMER\Documents\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI-To-ETIC Sender.exe.manifest
 C:\Users\AMER\Documents\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI-To-ETIC Sender.application
 C:\Users\AMER\Documents\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.Auto_Forwarder.resources
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\bin\Release\OLDI-To-ETIC Sender.exe.config
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI-To-ETIC Sender.exe
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI-To-ETIC Sender.pdb
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\bin\Release\OLDI-To-ETIC Sender.exe.manifest
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\bin\Release\OLDI-To-ETIC Sender.application
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\bin\Release\OLDI-To-ETIC Sender.exe
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\bin\Release\OLDI-To-ETIC Sender.pdb
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.About.resources
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.Auto_Forwarder.resources
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.MainForm.resources
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.Help.resources
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.Properties.Resources.resources
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.Settings.resources
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\GenerateResource-ResGen.read.1.tlog
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\GenerateResource-ResGen.write.1.tlog
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI-To-ETIC Sender.exe.manifest
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI-To-ETIC Sender.application

@@ -8,9 +8,15 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-
 namespace OLDI_To_ETIC_Sender
 {
+    public enum Protocol
+    {
+        TCP = 6,
+        UDP = 17,
+        Unknown = -1
+    };
+
     public partial class MainForm : Form
     {
         private static Auto_Forwarder My_Forwarder = new Auto_Forwarder();

@@ -80,10 +80,10 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="ACT.cs" />
-    <Compile Include="Auto_Forwarder.cs">
+    <Compile Include="OLDI Forwarder\Auto_Forwarder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Auto_Forwarder.Designer.cs">
+    <Compile Include="OLDI Forwarder\Auto_Forwarder.Designer.cs">
       <DependentUpon>Auto_Forwarder.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -99,6 +99,12 @@
     <Compile Include="Help.Designer.cs">
       <DependentUpon>Help.cs</DependentUpon>
     </Compile>
+    <Compile Include="OLDI Forwarder\Bit_Ops.cs" />
+    <Compile Include="OLDI Forwarder\FMTP_Parser.cs" />
+    <Compile Include="OLDI Forwarder\IPHeader.cs" />
+    <Compile Include="OLDI Forwarder\DNSHeader.cs" />
+    <Compile Include="OLDI Forwarder\TCPHeader.cs" />
+    <Compile Include="OLDI Forwarder\UDPHeader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs">
@@ -110,7 +116,7 @@
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Auto_Forwarder.resx">
+    <EmbeddedResource Include="OLDI Forwarder\Auto_Forwarder.resx">
       <DependentUpon>Auto_Forwarder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

@@ -28,37 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.textBoxPartnerAddress = new System.Windows.Forms.TextBox();
             this.textBoxPortNumber = new System.Windows.Forms.TextBox();
             this.comboBoxNetworkInterface = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.listBoxReceivedData = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.treeView = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
-            // button1
+            // btnStart
             // 
-            this.button1.Location = new System.Drawing.Point(337, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Connect";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnStart.Location = new System.Drawing.Point(12, 238);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(70, 23);
+            this.btnStart.TabIndex = 0;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBoxPartnerAddress
             // 
-            this.textBoxPartnerAddress.Location = new System.Drawing.Point(161, 20);
+            this.textBoxPartnerAddress.Location = new System.Drawing.Point(206, 21);
             this.textBoxPartnerAddress.Name = "textBoxPartnerAddress";
-            this.textBoxPartnerAddress.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPartnerAddress.Size = new System.Drawing.Size(188, 20);
             this.textBoxPartnerAddress.TabIndex = 1;
             // 
             // textBoxPortNumber
             // 
-            this.textBoxPortNumber.Location = new System.Drawing.Point(267, 20);
+            this.textBoxPortNumber.Location = new System.Drawing.Point(400, 21);
             this.textBoxPortNumber.Name = "textBoxPortNumber";
             this.textBoxPortNumber.Size = new System.Drawing.Size(64, 20);
             this.textBoxPortNumber.TabIndex = 2;
@@ -68,7 +68,7 @@
             this.comboBoxNetworkInterface.FormattingEnabled = true;
             this.comboBoxNetworkInterface.Location = new System.Drawing.Point(12, 20);
             this.comboBoxNetworkInterface.Name = "comboBoxNetworkInterface";
-            this.comboBoxNetworkInterface.Size = new System.Drawing.Size(143, 21);
+            this.comboBoxNetworkInterface.Size = new System.Drawing.Size(188, 21);
             this.comboBoxNetworkInterface.TabIndex = 27;
             // 
             // label1
@@ -83,7 +83,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(158, 4);
+            this.label2.Location = new System.Drawing.Point(203, 5);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 29;
@@ -92,23 +92,15 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(264, 4);
+            this.label3.Location = new System.Drawing.Point(397, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 30;
             this.label3.Text = "Partner Port";
             // 
-            // listBoxReceivedData
-            // 
-            this.listBoxReceivedData.FormattingEnabled = true;
-            this.listBoxReceivedData.Location = new System.Drawing.Point(10, 47);
-            this.listBoxReceivedData.Name = "listBoxReceivedData";
-            this.listBoxReceivedData.Size = new System.Drawing.Size(397, 134);
-            this.listBoxReceivedData.TabIndex = 31;
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(10, 182);
+            this.button2.Location = new System.Drawing.Point(389, 238);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 32;
@@ -116,20 +108,30 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // treeView
+            // 
+            this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView.Location = new System.Drawing.Point(12, 47);
+            this.treeView.Name = "treeView";
+            this.treeView.Size = new System.Drawing.Size(452, 185);
+            this.treeView.TabIndex = 33;
+            // 
             // Auto_Forwarder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 210);
+            this.ClientSize = new System.Drawing.Size(473, 273);
+            this.Controls.Add(this.treeView);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.listBoxReceivedData);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxNetworkInterface);
             this.Controls.Add(this.textBoxPortNumber);
             this.Controls.Add(this.textBoxPartnerAddress);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnStart);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -144,14 +146,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.TextBox textBoxPartnerAddress;
         private System.Windows.Forms.TextBox textBoxPortNumber;
         private System.Windows.Forms.ComboBox comboBoxNetworkInterface;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListBox listBoxReceivedData;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TreeView treeView;
     }
 }
