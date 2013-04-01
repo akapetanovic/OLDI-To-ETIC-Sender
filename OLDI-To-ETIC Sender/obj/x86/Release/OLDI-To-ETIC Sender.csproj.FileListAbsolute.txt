@@ -51,6 +51,6 @@ C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.Auto_Forwarder.resources
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI-To-ETIC Sender.csproj.GenerateResource.Cache
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.OLDI_Forwarder.OldiPartners.resources
-C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.OldiPartners.resources
 C:\Users\AMER\Documents\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.OldiPartners.resources
 C:\Users\AMER\Documents\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.OLDI_Forwarder.DisplayItmes.resources
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\obj\x86\Release\OLDI_To_ETIC_Sender.OLDI_Forwarder.DisplayItmes.resources

@@ -15,6 +15,7 @@ namespace OLDI_To_ETIC_Sender
         {
             InitializeComponent();
             this.labelSelectedFolder.Text = GlobalDataAndSettings.Etic_Dir;
+            this.labelDataDirectory.Text = GlobalDataAndSettings.Data_Dir;
             this.textBoxCOM1_Name.Text = GlobalDataAndSettings.Sender;
             this.textBoxCOM2_Name.Text = GlobalDataAndSettings.Receiver;
         }
@@ -26,6 +27,8 @@ namespace OLDI_To_ETIC_Sender
 
         private void Settings_Load(object sender, EventArgs e)
         {
+            this.textBoxCOM1_Name.Text = Properties.Settings.Default.Sender;
+            this.textBoxCOM2_Name.Text = Properties.Settings.Default.Receiver;
 
         }
 
@@ -45,6 +48,12 @@ namespace OLDI_To_ETIC_Sender
             {
                 MessageBox.Show("Please fill out all parameters before saving");
             }
+
+            Properties.Settings.Default.Sender = GlobalDataAndSettings.Sender;
+            Properties.Settings.Default.Receiver = GlobalDataAndSettings.Receiver;
+            Properties.Settings.Default.Etic_Dir = GlobalDataAndSettings.Etic_Dir;
+            Properties.Settings.Default.Data_Dir = GlobalDataAndSettings.Data_Dir;
+            Properties.Settings.Default.Save();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

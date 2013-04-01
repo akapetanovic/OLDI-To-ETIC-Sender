@@ -50,9 +50,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(8, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.Size = new System.Drawing.Size(76, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Sender";
+            this.label2.Text = "Sender (Client)";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // groupBox1
@@ -87,9 +87,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(204, 21);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.Size = new System.Drawing.Size(90, 13);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Receiver";
+            this.label3.Text = "Receiver (Server)";
             // 
             // button1
             // 

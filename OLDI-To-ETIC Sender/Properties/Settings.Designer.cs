@@ -25,114 +25,6 @@ namespace OLDI_To_ETIC_Sender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_ID1 {
-            get {
-                return ((string)(this["P_ID1"]));
-            }
-            set {
-                this["P_ID1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_ID2 {
-            get {
-                return ((string)(this["P_ID2"]));
-            }
-            set {
-                this["P_ID2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_ID3 {
-            get {
-                return ((string)(this["P_ID3"]));
-            }
-            set {
-                this["P_ID3"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_ADDR1 {
-            get {
-                return ((string)(this["P_ADDR1"]));
-            }
-            set {
-                this["P_ADDR1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_ADDR2 {
-            get {
-                return ((string)(this["P_ADDR2"]));
-            }
-            set {
-                this["P_ADDR2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_ADDR3 {
-            get {
-                return ((string)(this["P_ADDR3"]));
-            }
-            set {
-                this["P_ADDR3"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_PORT1 {
-            get {
-                return ((string)(this["P_PORT1"]));
-            }
-            set {
-                this["P_PORT1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_PORT2 {
-            get {
-                return ((string)(this["P_PORT2"]));
-            }
-            set {
-                this["P_PORT2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_PORT3 {
-            get {
-                return ((string)(this["P_PORT3"]));
-            }
-            set {
-                this["P_PORT3"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool Msg_Version {
             get {
@@ -181,37 +73,61 @@ namespace OLDI_To_ETIC_Sender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_ID4 {
+        [global::System.Configuration.DefaultSettingValueAttribute("8500")]
+        public string SourcePort {
             get {
-                return ((string)(this["P_ID4"]));
+                return ((string)(this["SourcePort"]));
             }
             set {
-                this["P_ID4"] = value;
+                this["SourcePort"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_ADDR4 {
+        [global::System.Configuration.DefaultSettingValueAttribute("ZACC")]
+        public string Sender {
             get {
-                return ((string)(this["P_ADDR4"]));
+                return ((string)(this["Sender"]));
             }
             set {
-                this["P_ADDR4"] = value;
+                this["Sender"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string P_PORT4 {
+        [global::System.Configuration.DefaultSettingValueAttribute("LQSB")]
+        public string Receiver {
             get {
-                return ((string)(this["P_PORT4"]));
+                return ((string)(this["Receiver"]));
             }
             set {
-                this["P_PORT4"] = value;
+                this["Receiver"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Etic\\batch")]
+        public string Etic_Dir {
+            get {
+                return ((string)(this["Etic_Dir"]));
+            }
+            set {
+                this["Etic_Dir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Etic\\batch")]
+        public string Data_Dir {
+            get {
+                return ((string)(this["Data_Dir"]));
+            }
+            set {
+                this["Data_Dir"] = value;
             }
         }
     }

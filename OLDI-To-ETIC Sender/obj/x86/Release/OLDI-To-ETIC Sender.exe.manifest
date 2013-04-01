@@ -57,14 +57,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OLDI-To-ETIC Sender.exe" size="52736">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OLDI-To-ETIC Sender.exe" size="53248">
       <assemblyIdentity name="OLDI-To-ETIC Sender" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>EdD9m9q3cpIjtBEZZONWxjmXwqI=</dsig:DigestValue>
+        <dsig:DigestValue>yDCBmPe2yCs1Azx+rI1KH6CS+wU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

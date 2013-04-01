@@ -8,8 +8,8 @@ namespace OLDI_To_ETIC_Sender
     class GlobalDataAndSettings
     {
         // Specify a "currently active folder"
-        static public string Etic_Dir = @"N/A";
-        static public string Data_Dir = @"N/A";
+        static public string Etic_Dir = @"C:\Etic\batch";
+        static public string Data_Dir = @"C:\Etic\batch";
 
         // ETIC etic.out file
         //static public string Etic_Out_File = "etic.out";
@@ -31,8 +31,8 @@ namespace OLDI_To_ETIC_Sender
 
         //
         // Define communiction partner pairs as defined in Etic
-        static public string Sender = "N/A";
-        static public string Receiver = "N/A";
+        static public string Sender = "ZACC";
+        static public string Receiver = "LQSB";
 
         static private int SequenceNumber = 1;
 

@@ -2,33 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="OLDI_To_ETIC_Sender.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="P_ID1" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="P_ID2" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="P_ID3" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="P_ADDR1" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="P_ADDR2" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="P_ADDR3" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="P_PORT1" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="P_PORT2" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="P_PORT3" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="Msg_Version" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -41,14 +14,20 @@
     <Setting Name="Msg_Content" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="P_ID4" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="SourcePort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">8500</Value>
     </Setting>
-    <Setting Name="P_ADDR4" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="Sender" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ZACC</Value>
     </Setting>
-    <Setting Name="P_PORT4" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="Receiver" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LQSB</Value>
+    </Setting>
+    <Setting Name="Etic_Dir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Etic\batch</Value>
+    </Setting>
+    <Setting Name="Data_Dir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Etic\batch</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -137,6 +137,11 @@ namespace OLDI_To_ETIC_Sender
 
         private void UpdateSettingParametersDisplay()
         {
+            GlobalDataAndSettings.Sender = Properties.Settings.Default.Sender;
+            GlobalDataAndSettings.Data_Dir = Properties.Settings.Default.Receiver;
+            GlobalDataAndSettings.Etic_Dir = Properties.Settings.Default.Etic_Dir;
+            GlobalDataAndSettings.Data_Dir = Properties.Settings.Default.Data_Dir;
+            
             this.Label_ETIC_Directory.Text = GlobalDataAndSettings.Etic_Dir;
             this.labelReceivingUnit.Text = GlobalDataAndSettings.Receiver;
             this.labelSendingUnit.Text = GlobalDataAndSettings.Sender;

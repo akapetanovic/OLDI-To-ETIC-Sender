@@ -21,8 +21,6 @@ namespace OLDI_To_ETIC_Sender
 
         private delegate void AddTreeNode(TreeNode node);
 
-        string Local_Interface_Address;
-        string Partner_IP;
         string Partner_Port;
         bool Is_IPV6 = false;
 
@@ -34,41 +32,17 @@ namespace OLDI_To_ETIC_Sender
         private void Auto_Forwarder_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
-
-            LoadOLDIPartners();
+            UpdateSettingParametersDisplay();
         }
 
-        private void LoadOLDIPartners()
+        private void UpdateSettingParametersDisplay()
         {
-            this.comboBoxP_ID.Items.Clear();
-            this.comboBoxPartnerIP.Items.Clear();
-            this.comboBoxP_Port.Items.Clear();
+            this.labelReceivingUnit.Text = GlobalDataAndSettings.Receiver;
+            this.labelSendingUnit.Text = GlobalDataAndSettings.Sender;
+            textBoxSourcePort.Text = Properties.Settings.Default.SourcePort;
 
-            if (Properties.Settings.Default.P_ID3.Length > 0 && Properties.Settings.Default.P_ADDR3.Length > 0 && Properties.Settings.Default.P_PORT3.Length > 0)
-            {
-                this.comboBoxP_ID.Items.Add(Properties.Settings.Default.P_ID3);
-                this.comboBoxPartnerIP.Items.Add(Properties.Settings.Default.P_ADDR3);
-                this.comboBoxP_Port.Items.Add(Properties.Settings.Default.P_PORT3);
-            }
-            if (Properties.Settings.Default.P_ID2.Length > 0 && Properties.Settings.Default.P_ADDR2.Length > 0 && Properties.Settings.Default.P_PORT2.Length > 0)
-            {
-                this.comboBoxP_ID.Items.Add(Properties.Settings.Default.P_ID2);
-                this.comboBoxPartnerIP.Items.Add(Properties.Settings.Default.P_ADDR2);
-                this.comboBoxP_Port.Items.Add(Properties.Settings.Default.P_PORT2);
-            }
-            if (Properties.Settings.Default.P_ID1.Length > 0 && Properties.Settings.Default.P_ADDR1.Length > 0 && Properties.Settings.Default.P_PORT1.Length > 0)
-            {
-                this.comboBoxP_ID.Items.Add(Properties.Settings.Default.P_ID1);
-                this.comboBoxPartnerIP.Items.Add(Properties.Settings.Default.P_ADDR1);
-                this.comboBoxP_Port.Items.Add(Properties.Settings.Default.P_PORT1);
-            }
-
-            if (this.comboBoxP_ID.Items.Count > 0)
-            {
-                this.comboBoxP_ID.SelectedIndex = 0;
-                this.comboBoxPartnerIP.SelectedIndex = 0;
-                this.comboBoxP_Port.SelectedIndex = 0;
-            }
+            this.radioButtonServer.Text = "Server" + " (" + GlobalDataAndSettings.Receiver + " )";
+            this.radioButtonClient.Text = "Client" + " (" + GlobalDataAndSettings.Sender + " )";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -186,243 +160,95 @@ namespace OLDI_To_ETIC_Sender
 
         private void ParseData(byte[] byteData, int nReceived)
         {
-
             TreeNode rootNode = new TreeNode();
-            bool Process = true;
-            bool OLDI_Check_Requested = false;
-            bool Inhibit_Due_To_Not_Valid_FMTP = false;
-            IPAddress Partner_Address;
-            Common_Header_Data ipHeader;
+            Common_Header_Data ipHeader = new Common_Header_Data();
+            IPHeader_IPV4 ipHeader_IPV4;
 
-            // In IPV6 there is no header when using raw socket. So, lets handle it.
-            if (Is_IPV6)
+            if (!Is_IPV6)
             {
-                Process = true;
+                ipHeader_IPV4 = new IPHeader_IPV4(byteData, nReceived);
+                ipHeader.Data = ipHeader_IPV4.Data;
+                ipHeader.DestinationAddress = ipHeader_IPV4.DestinationAddress;
+                ipHeader.SourceAddress = ipHeader_IPV4.SourceAddress;
+                ipHeader.ProtocolType = ipHeader_IPV4.ProtocolType;
+                ipHeader.MessageLength = ipHeader_IPV4.MessageLength;
             }
             else
             {
-                //Since all protocol packets are encapsulated in the IP datagram
-                //so we start by parsing the IP header and see what protocol data
-                //is being carried by it
-                IPHeader_IPV4 ipHeader_IPV4 = new IPHeader_IPV4(byteData, nReceived);
-
-                Process = true;
-                OLDI_Check_Requested = false;
-                Inhibit_Due_To_Not_Valid_FMTP = false;
-                Partner_Address = IPAddress.Parse(Partner_IP);
-
-                ////////////////////////////////////////////////////////////////////////////
-                // Here check if OLDI partner IP address and Port number have been defined
-                // If so then check that only applicable OLDI data is processed and rest ignored.
-                // If no data is provided then process all data
-                if ((Partner_IP != null) && (Partner_Port != null))
-                {
-                    Partner_Address = IPAddress.Parse(Partner_IP);
-
-                    Process = false;
-                    OLDI_Check_Requested = true;
-
-                    // First check if this is TCP
-                    if ((ipHeader_IPV4.ProtocolType == Protocol.TCP))
-                    {
-                        // Only process data going between two partners
-                        if ((Local_Interface_Address == ipHeader_IPV4.SourceAddress.ToString()) && (Partner_Address.ToString() == ipHeader_IPV4.DestinationAddress.ToString()))
-                        {
-                            Process = true;
-                        }
-                        else if ((Partner_Address.ToString() == ipHeader_IPV4.SourceAddress.ToString()) && (Local_Interface_Address.ToString() == ipHeader_IPV4.DestinationAddress.ToString()))
-                        {
-                            Process = true;
-                        }
-                    }
-                }
+                ipHeader.Data = byteData;
+                ipHeader.MessageLength = (ushort)nReceived;
+                ipHeader.ProtocolType = Protocol.TCP;
             }
 
-
-            if (Process)
+            if (ipHeader.ProtocolType == Protocol.TCP)
             {
-                //Now according to the protocol being carried by the IP datagram we parse 
-                //the data field of the datagram
-                switch (ipHeader.ProtocolType)
-                {
-                    case Protocol.TCP:
+                TCPHeader tcpHeader = new TCPHeader(ipHeader.Data,//IPHeader.Data stores the data being carried by the IP datagram
+                                                    ipHeader.MessageLength);//Length of the data field 
 
-                        TCPHeader tcpHeader = new TCPHeader(ipHeader.Data,//IPHeader.Data stores the data being carried by the IP datagram
-                                                            ipHeader.MessageLength);//Length of the data field 
-
-                        bool Is_OLDI = ((tcpHeader.DestinationPort == Partner_Port) || (tcpHeader.SourcePort == Partner_Port));
-
-                        if (OLDI_Check_Requested && Is_OLDI)
-                        {
-                            FMTP_Parser.FMPT_Header_and_Data Parsed_Msg = FMTP_Parser.FMTP_Msg_Parser(tcpHeader.Data);
-
-                            if (Parsed_Msg.Valid_FMTP_Data == false)
-                            {
-                                Inhibit_Due_To_Not_Valid_FMTP = true;
-                            }
-                            else
-                            {
-                                TreeNode tcpNode = MakeTCPTreeNode(tcpHeader, OLDI_Check_Requested, Parsed_Msg);
-                                rootNode.Nodes.Add(tcpNode);
-                            }
-                        }
-                        else if (OLDI_Check_Requested == false)
-                        {
-                            TreeNode tcpNode = MakeTCPTreeNode(tcpHeader, OLDI_Check_Requested, new FMTP_Parser.FMPT_Header_and_Data());
-                            rootNode.Nodes.Add(tcpNode);
-
-                            //If the port is equal to 53 then the underlying protocol is DNS
-                            //Note: DNS can use either TCP or UDP thats why the check is done twice
-                            if (tcpHeader.DestinationPort == "53" || tcpHeader.SourcePort == "53")
-                            {
-                                TreeNode dnsNode = MakeDNSTreeNode(tcpHeader.Data, (int)tcpHeader.MessageLength);
-                                rootNode.Nodes.Add(dnsNode);
-                            }
-                        }
-                        else
-                        {
-                            Inhibit_Due_To_Not_Valid_FMTP = true;
-                        }
-
-                        break;
-
-                    case Protocol.UDP:
-
-                        UDPHeader udpHeader = new UDPHeader(ipHeader.Data,              //IPHeader.Data stores the data being 
-                            //carried by the IP datagram
-                                                           (int)ipHeader.MessageLength);//Length of the data field                    
-
-                        TreeNode udpNode = MakeUDPTreeNode(udpHeader);
-
-                        rootNode.Nodes.Add(udpNode);
-
-                        //If the port is equal to 53 then the underlying protocol is DNS
-                        //Note: DNS can use either TCP or UDP thats why the check is done twice
-                        if (udpHeader.DestinationPort == "53" || udpHeader.SourcePort == "53")
-                        {
-
-                            TreeNode dnsNode = MakeDNSTreeNode(udpHeader.Data,
-                                //Length of UDP header is always eight bytes so we subtract that out of the total 
-                                //length to find the length of the data
-                                                               Convert.ToInt32(udpHeader.Length) - 8);
-                            rootNode.Nodes.Add(dnsNode);
-                        }
-
-                        break;
-
-                    case Protocol.Unknown:
-                        break;
-                }
-
-                if (Inhibit_Due_To_Not_Valid_FMTP == false)
+                if (tcpHeader.SourcePort == Properties.Settings.Default.SourcePort || tcpHeader.DestinationPort == Properties.Settings.Default.SourcePort)
                 {
                     AddTreeNode addTreeNode = new AddTreeNode(OnAddTreeNode);
                     string Date_Time = DateTime.Now.ToShortDateString() + " / " + DateTime.Now.ToLongTimeString();
 
-                    string Source = ipHeader.SourceAddress.ToString();
-                    string Destination = ipHeader.DestinationAddress.ToString();
+                    FMTP_Parser.FMPT_Header_and_Data FMTP_Data = FMTP_Parser.FMTP_Msg_Parser(tcpHeader.Data);
 
-                    if (Source == Properties.Settings.Default.P_ADDR1)
-                        Source = Properties.Settings.Default.P_ID1;
-                    else if (Source == Properties.Settings.Default.P_ADDR2)
-                        Source = Properties.Settings.Default.P_ID2;
-                    else if (Source == Properties.Settings.Default.P_ADDR3)
-                        Source = Properties.Settings.Default.P_ID3;
-                    else if (Source == Properties.Settings.Default.P_ADDR4)
-                        Source = Properties.Settings.Default.P_ID4;
+                    if (FMTP_Data.Valid_FMTP_Data)
+                    {
+                        TreeNode fmtpNode = MakeFMTPTreeNode(FMTP_Data);
+                        rootNode.Nodes.Add(fmtpNode);
 
-                    if (Destination == Properties.Settings.Default.P_ADDR1)
-                        Destination = Properties.Settings.Default.P_ID1;
-                    else if (Source == Properties.Settings.Default.P_ADDR2)
-                        Destination = Properties.Settings.Default.P_ID2;
-                    else if (Destination == Properties.Settings.Default.P_ADDR3)
-                        Destination = Properties.Settings.Default.P_ID3;
-                    else if (Destination == Properties.Settings.Default.P_ADDR4)
-                        Destination = Properties.Settings.Default.P_ID4;
+                        string Source;
+                        string Destination;
 
-                    rootNode.Text = Date_Time + ": " + Source + "  ->  " + Destination;
+                        if (tcpHeader.SourcePort == Properties.Settings.Default.SourcePort)
+                        {
+                            Destination = Properties.Settings.Default.Sender;
+                            Source = Properties.Settings.Default.Receiver;
+                        }
+                        else
+                        {
+                            Source = Properties.Settings.Default.Sender;
+                            Destination = Properties.Settings.Default.Receiver;
+                        }
 
-                    //Thread safe adding of the nodes
-                    treeView.Invoke(addTreeNode, new object[] { rootNode });
+                        rootNode.Text = Date_Time + ": " + Source + "  ->  " + Destination;
+
+                        //Thread safe adding of the nodes
+                        treeView.Invoke(addTreeNode, new object[] { rootNode });
+
+                        // Now check if Auto forward to ETIC is requested
+                        //
+                        // CLIENT DATA IS TO BE FORWARDED
+                        if (this.radioButtonClient.Checked && (Source == Properties.Settings.Default.Sender))
+                        {
+
+                        }
+                        // SERVER DATA IS TO BE FORWARDED
+                        else if (this.radioButtonServer.Checked && Source == Properties.Settings.Default.Receiver)
+                        {
+
+                        }
+                    }
                 }
             }
         }
 
-
-
         //Helper function which returns the information contained in the TCP header as a
         //tree node
-        private TreeNode MakeTCPTreeNode(TCPHeader tcpHeader, bool OLDI_Data, FMTP_Parser.FMPT_Header_and_Data Parsed_Msg)
+        private TreeNode MakeFMTPTreeNode(FMTP_Parser.FMPT_Header_and_Data FMPT_Data)
         {
             TreeNode tcpNode = new TreeNode();
-
-            if (OLDI_Data == false)
-            {
-                tcpNode.Text = "TCP";
-
-                tcpNode.Nodes.Add("Source Port: " + tcpHeader.SourcePort);
-                tcpNode.Nodes.Add("Destination Port: " + tcpHeader.DestinationPort);
-                tcpNode.Nodes.Add("Sequence Number: " + tcpHeader.SequenceNumber);
-
-                if (tcpHeader.AcknowledgementNumber != "")
-                    tcpNode.Nodes.Add("Acknowledgement Number: " + tcpHeader.AcknowledgementNumber);
-
-                tcpNode.Nodes.Add("Header Length: " + tcpHeader.HeaderLength);
-                tcpNode.Nodes.Add("Flags: " + tcpHeader.Flags);
-                tcpNode.Nodes.Add("Window Size: " + tcpHeader.WindowSize);
-                tcpNode.Nodes.Add("Checksum: " + tcpHeader.Checksum);
-
-                if (tcpHeader.UrgentPointer != "")
-                    tcpNode.Nodes.Add("Urgent Pointer: " + tcpHeader.UrgentPointer);
-            }
-            else
-            {
-                tcpNode.Text = "OLDI";
-                if (Properties.Settings.Default.Msg_Version)
-                    tcpNode.Nodes.Add("Msg Version: " + Parsed_Msg.version);
-                if (Properties.Settings.Default.Msg_Length)
-                    tcpNode.Nodes.Add("Msg Length: " + Parsed_Msg.msg_length + " bytes");
-                if (Properties.Settings.Default.Msg_Type)
-                    tcpNode.Nodes.Add("Msg Type: " + Parsed_Msg.msg_type);
-                if (Properties.Settings.Default.Msg_Content)
-                    tcpNode.Nodes.Add("Msg Content: " + Parsed_Msg.msg_content);
-            }
+            tcpNode.Text = "OLDI";
+            if (Properties.Settings.Default.Msg_Version)
+                tcpNode.Nodes.Add("Msg Version: " + FMPT_Data.version);
+            if (Properties.Settings.Default.Msg_Length)
+                tcpNode.Nodes.Add("Msg Length: " + FMPT_Data.msg_length + " bytes");
+            if (Properties.Settings.Default.Msg_Type)
+                tcpNode.Nodes.Add("Msg Type: " + FMPT_Data.msg_type);
+            if (Properties.Settings.Default.Msg_Content)
+                tcpNode.Nodes.Add("Msg Content: " + FMPT_Data.msg_content);
 
             return tcpNode;
-        }
-
-        //Helper function which returns the information contained in the UDP header as a
-        //tree node
-        private TreeNode MakeUDPTreeNode(UDPHeader udpHeader)
-        {
-            TreeNode udpNode = new TreeNode();
-
-            udpNode.Text = "UDP";
-            udpNode.Nodes.Add("Source Port: " + udpHeader.SourcePort);
-            udpNode.Nodes.Add("Destination Port: " + udpHeader.DestinationPort);
-            udpNode.Nodes.Add("Length: " + udpHeader.Length);
-            udpNode.Nodes.Add("Checksum: " + udpHeader.Checksum);
-
-            return udpNode;
-        }
-
-        //Helper function which returns the information contained in the DNS header as a
-        //tree node
-        private TreeNode MakeDNSTreeNode(byte[] byteData, int nLength)
-        {
-            DNSHeader dnsHeader = new DNSHeader(byteData, nLength);
-
-            TreeNode dnsNode = new TreeNode();
-
-            dnsNode.Text = "DNS";
-            dnsNode.Nodes.Add("Identification: " + dnsHeader.Identification);
-            dnsNode.Nodes.Add("Flags: " + dnsHeader.Flags);
-            dnsNode.Nodes.Add("Questions: " + dnsHeader.TotalQuestions);
-            dnsNode.Nodes.Add("Answer RRs: " + dnsHeader.TotalAnswerRRs);
-            dnsNode.Nodes.Add("Authority RRs: " + dnsHeader.TotalAuthorityRRs);
-            dnsNode.Nodes.Add("Additional RRs: " + dnsHeader.TotalAdditionalRRs);
-
-            return dnsNode;
         }
 
         private void OnAddTreeNode(TreeNode node)
@@ -445,6 +271,8 @@ namespace OLDI_To_ETIC_Sender
 
                 comboBoxNetworkInterface.SelectedIndex = 0;
             }
+
+            UpdateSettingParametersDisplay();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -456,7 +284,6 @@ namespace OLDI_To_ETIC_Sender
 
         private void comboBoxNetworkInterface_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Local_Interface_Address = comboBoxNetworkInterface.Text;
         }
 
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -504,47 +331,29 @@ namespace OLDI_To_ETIC_Sender
 
         }
 
-        private void comboBoxPartnerIP_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.comboBoxP_Port.SelectedIndex = this.comboBoxPartnerIP.SelectedIndex;
-            this.comboBoxP_ID.SelectedIndex = this.comboBoxPartnerIP.SelectedIndex;
-
-            Partner_IP = this.comboBoxPartnerIP.Text;
-            Partner_Port = this.comboBoxP_Port.Text;
-        }
-
-        private void partnersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OldiPartners Partners = new OldiPartners();
-            Partners.Show();
-        }
-
         private void comboBoxPartnerIP_Click(object sender, EventArgs e)
         {
-            LoadOLDIPartners();
-        }
-
-        private void comboBoxP_Port_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.comboBoxP_ID.SelectedIndex = this.comboBoxP_Port.SelectedIndex;
-            this.comboBoxPartnerIP.SelectedIndex = this.comboBoxP_Port.SelectedIndex;
-
-            Partner_IP = this.comboBoxPartnerIP.Text;
-            Partner_Port = this.comboBoxP_Port.Text;
-        }
-
-        private void comboBoxP_ID_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.comboBoxP_Port.SelectedIndex = this.comboBoxP_ID.SelectedIndex;
-            this.comboBoxPartnerIP.SelectedIndex = this.comboBoxP_ID.SelectedIndex;
-
-            Partner_IP = this.comboBoxPartnerIP.Text;
-            Partner_Port = this.comboBoxP_Port.Text;
         }
 
         private void toolsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboBoxP_Port_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            treeView.Nodes.Clear();
+        }
+
+        private void textBoxSourcePort_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SourcePort = textBoxSourcePort.Text;
+            Properties.Settings.Default.Save();
         }
     }
 }

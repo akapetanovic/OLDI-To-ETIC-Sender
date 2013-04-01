@@ -31,22 +31,22 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.comboBoxNetworkInterface = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.treeView = new System.Windows.Forms.TreeView();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.partnersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comboBoxPartnerIP = new System.Windows.Forms.ComboBox();
-            this.comboBoxP_Port = new System.Windows.Forms.ComboBox();
-            this.comboBoxP_ID = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.labelLocal_ID = new System.Windows.Forms.Label();
-            this.menuStrip1.SuspendLayout();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.labelReceivingUnit = new System.Windows.Forms.Label();
+            this.labelSendingUnit = new System.Windows.Forms.Label();
+            this.textBoxSourcePort = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButtonClient = new System.Windows.Forms.RadioButton();
+            this.radioButtonServer = new System.Windows.Forms.RadioButton();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStart
@@ -62,7 +62,7 @@
             // comboBoxNetworkInterface
             // 
             this.comboBoxNetworkInterface.FormattingEnabled = true;
-            this.comboBoxNetworkInterface.Location = new System.Drawing.Point(12, 49);
+            this.comboBoxNetworkInterface.Location = new System.Drawing.Point(12, 25);
             this.comboBoxNetworkInterface.Name = "comboBoxNetworkInterface";
             this.comboBoxNetworkInterface.Size = new System.Drawing.Size(188, 21);
             this.comboBoxNetworkInterface.TabIndex = 27;
@@ -71,31 +71,21 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 33);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 13);
             this.label1.TabIndex = 28;
             this.label1.Text = "Local/Sniffer  Interface";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(203, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 13);
-            this.label2.TabIndex = 29;
-            this.label2.Text = "Src Partner IP";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(398, 33);
+            this.label3.Location = new System.Drawing.Point(209, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 13);
+            this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 30;
-            this.label3.Text = "Src Partner Port";
+            this.label3.Text = "Source Port";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // button2
@@ -110,12 +100,12 @@
             // 
             // treeView
             // 
-            this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView.Location = new System.Drawing.Point(12, 76);
+            this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView.Location = new System.Drawing.Point(12, 106);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(538, 557);
+            this.treeView.Size = new System.Drawing.Size(538, 527);
             this.treeView.TabIndex = 33;
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
             // 
@@ -139,121 +129,135 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // checkBox1
+            // button4
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(250, 643);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(113, 17);
-            this.checkBox1.TabIndex = 36;
-            this.checkBox1.Text = "Auto Frwd to ETIC";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.button4.Location = new System.Drawing.Point(250, 639);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 43;
+            this.button4.Text = "Clear";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // menuStrip1
+            // label13
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolsToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(559, 24);
-            this.menuStrip1.TabIndex = 37;
-            this.menuStrip1.Text = "menuStrip1";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 78);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(120, 13);
+            this.label13.TabIndex = 47;
+            this.label13.Text = "Receiving (Server) Unit:";
             // 
-            // toolsToolStripMenuItem
+            // label12
             // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.partnersToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.toolsToolStripMenuItem.Text = "Settings";
-            this.toolsToolStripMenuItem.Click += new System.EventHandler(this.toolsToolStripMenuItem_Click);
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 55);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(109, 13);
+            this.label12.TabIndex = 46;
+            this.label12.Text = "Sending (Client) Unit :";
             // 
-            // partnersToolStripMenuItem
+            // labelReceivingUnit
             // 
-            this.partnersToolStripMenuItem.Name = "partnersToolStripMenuItem";
-            this.partnersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.partnersToolStripMenuItem.Text = "OLDI Partners";
-            this.partnersToolStripMenuItem.Click += new System.EventHandler(this.partnersToolStripMenuItem_Click);
+            this.labelReceivingUnit.AutoSize = true;
+            this.labelReceivingUnit.Location = new System.Drawing.Point(138, 78);
+            this.labelReceivingUnit.Name = "labelReceivingUnit";
+            this.labelReceivingUnit.Size = new System.Drawing.Size(14, 13);
+            this.labelReceivingUnit.TabIndex = 45;
+            this.labelReceivingUnit.Text = "X";
             // 
-            // comboBoxPartnerIP
+            // labelSendingUnit
             // 
-            this.comboBoxPartnerIP.FormattingEnabled = true;
-            this.comboBoxPartnerIP.Location = new System.Drawing.Point(206, 49);
-            this.comboBoxPartnerIP.Name = "comboBoxPartnerIP";
-            this.comboBoxPartnerIP.Size = new System.Drawing.Size(188, 21);
-            this.comboBoxPartnerIP.TabIndex = 38;
-            this.comboBoxPartnerIP.SelectedIndexChanged += new System.EventHandler(this.comboBoxPartnerIP_SelectedIndexChanged);
-            this.comboBoxPartnerIP.Click += new System.EventHandler(this.comboBoxPartnerIP_Click);
+            this.labelSendingUnit.AutoSize = true;
+            this.labelSendingUnit.Location = new System.Drawing.Point(138, 55);
+            this.labelSendingUnit.Name = "labelSendingUnit";
+            this.labelSendingUnit.Size = new System.Drawing.Size(14, 13);
+            this.labelSendingUnit.TabIndex = 44;
+            this.labelSendingUnit.Text = "X";
             // 
-            // comboBoxP_Port
+            // textBoxSourcePort
             // 
-            this.comboBoxP_Port.FormattingEnabled = true;
-            this.comboBoxP_Port.Location = new System.Drawing.Point(401, 49);
-            this.comboBoxP_Port.Name = "comboBoxP_Port";
-            this.comboBoxP_Port.Size = new System.Drawing.Size(77, 21);
-            this.comboBoxP_Port.TabIndex = 39;
-            this.comboBoxP_Port.SelectedIndexChanged += new System.EventHandler(this.comboBoxP_Port_SelectedIndexChanged);
+            this.textBoxSourcePort.Location = new System.Drawing.Point(212, 26);
+            this.textBoxSourcePort.Name = "textBoxSourcePort";
+            this.textBoxSourcePort.Size = new System.Drawing.Size(60, 20);
+            this.textBoxSourcePort.TabIndex = 48;
+            this.textBoxSourcePort.TextChanged += new System.EventHandler(this.textBoxSourcePort_TextChanged);
             // 
-            // comboBoxP_ID
+            // groupBox1
             // 
-            this.comboBoxP_ID.FormattingEnabled = true;
-            this.comboBoxP_ID.Location = new System.Drawing.Point(484, 49);
-            this.comboBoxP_ID.Name = "comboBoxP_ID";
-            this.comboBoxP_ID.Size = new System.Drawing.Size(66, 21);
-            this.comboBoxP_ID.TabIndex = 40;
-            this.comboBoxP_ID.SelectedIndexChanged += new System.EventHandler(this.comboBoxP_ID_SelectedIndexChanged);
+            this.groupBox1.Controls.Add(this.radioButtonServer);
+            this.groupBox1.Controls.Add(this.radioButtonClient);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Location = new System.Drawing.Point(290, 9);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(257, 91);
+            this.groupBox1.TabIndex = 49;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Auto Forward to ETIC (batch mode)";
             // 
-            // label4
+            // radioButton1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(481, 33);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 13);
-            this.label4.TabIndex = 41;
-            this.label4.Text = "Src Partner ID";
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 19);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(51, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "None";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // labelLocal_ID
+            // radioButtonClient
             // 
-            this.labelLocal_ID.AutoSize = true;
-            this.labelLocal_ID.Location = new System.Drawing.Point(443, 5);
-            this.labelLocal_ID.Name = "labelLocal_ID";
-            this.labelLocal_ID.Size = new System.Drawing.Size(73, 13);
-            this.labelLocal_ID.TabIndex = 42;
-            this.labelLocal_ID.Text = "Local ID: N/A";
+            this.radioButtonClient.AutoSize = true;
+            this.radioButtonClient.Location = new System.Drawing.Point(6, 42);
+            this.radioButtonClient.Name = "radioButtonClient";
+            this.radioButtonClient.Size = new System.Drawing.Size(51, 17);
+            this.radioButtonClient.TabIndex = 1;
+            this.radioButtonClient.TabStop = true;
+            this.radioButtonClient.Text = "Cilent";
+            this.radioButtonClient.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonServer
+            // 
+            this.radioButtonServer.AutoSize = true;
+            this.radioButtonServer.Location = new System.Drawing.Point(6, 65);
+            this.radioButtonServer.Name = "radioButtonServer";
+            this.radioButtonServer.Size = new System.Drawing.Size(56, 17);
+            this.radioButtonServer.TabIndex = 2;
+            this.radioButtonServer.TabStop = true;
+            this.radioButtonServer.Text = "Server";
+            this.radioButtonServer.UseVisualStyleBackColor = true;
             // 
             // Auto_Forwarder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(559, 674);
-            this.Controls.Add(this.labelLocal_ID);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBoxP_ID);
-            this.Controls.Add(this.comboBoxP_Port);
-            this.Controls.Add(this.comboBoxPartnerIP);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.textBoxSourcePort);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.labelReceivingUnit);
+            this.Controls.Add(this.labelSendingUnit);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.treeView);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxNetworkInterface);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Auto_Forwarder";
             this.Text = "Auto Forwarder";
             this.Load += new System.EventHandler(this.Auto_Forwarder_Load);
             this.VisibleChanged += new System.EventHandler(this.Auto_Forwarder_VisibleChanged);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,20 +268,20 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.ComboBox comboBoxNetworkInterface;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem partnersToolStripMenuItem;
-        private System.Windows.Forms.ComboBox comboBoxPartnerIP;
-        private System.Windows.Forms.ComboBox comboBoxP_Port;
-        private System.Windows.Forms.ComboBox comboBoxP_ID;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label labelLocal_ID;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label labelReceivingUnit;
+        private System.Windows.Forms.Label labelSendingUnit;
+        private System.Windows.Forms.TextBox textBoxSourcePort;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButtonServer;
+        private System.Windows.Forms.RadioButton radioButtonClient;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
