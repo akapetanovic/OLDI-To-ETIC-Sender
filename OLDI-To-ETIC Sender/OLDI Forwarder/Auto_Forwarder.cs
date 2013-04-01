@@ -24,6 +24,7 @@ namespace OLDI_To_ETIC_Sender
         string Local_Interface_Address;
         string Partner_IP;
         string Partner_Port;
+        bool Is_IPV6 = false;
 
         public Auto_Forwarder()
         {
@@ -89,7 +90,7 @@ namespace OLDI_To_ETIC_Sender
                         //For sniffing the socket to capture the packets has to be a raw socket, with the
                         //address family being of type internetwork, and protocol being IP
                         mainSocket = new Socket(AddressFamily.InterNetworkV6,
-                            SocketType.Raw, ProtocolType.IPv6);
+                            SocketType.Raw, ProtocolType.IP);
 
                         //Bind the socket to the selected IP address
                         mainSocket.Bind(new IPEndPoint(IPAddress.Parse(comboBoxNetworkInterface.Text), 0));
@@ -98,6 +99,8 @@ namespace OLDI_To_ETIC_Sender
                         mainSocket.SetSocketOption(SocketOptionLevel.IPv6,            //Applies only to IP packets
                                                    SocketOptionName.HeaderIncluded, //Set the include the header
                                                    true);                           //option to true
+
+                        Is_IPV6 = true;
                     }
                     else
                     {
@@ -113,6 +116,8 @@ namespace OLDI_To_ETIC_Sender
                         mainSocket.SetSocketOption(SocketOptionLevel.IP,            //Applies only to IP packets
                                                    SocketOptionName.HeaderIncluded, //Set the include the header
                                                    true);                           //option to true
+
+                        Is_IPV6 = false;
                     }
 
                     byte[] byTrue = new byte[4] { 1, 0, 0, 0 };
@@ -170,52 +175,72 @@ namespace OLDI_To_ETIC_Sender
             }
         }
 
+        private class Common_Header_Data
+        {
+            public IPAddress SourceAddress;
+            public IPAddress DestinationAddress;
+            public Protocol ProtocolType;
+            public byte[] Data = new byte[4096];  //Data carried by the datagram
+            public ushort MessageLength;
+        }
+
         private void ParseData(byte[] byteData, int nReceived)
         {
+
             TreeNode rootNode = new TreeNode();
-
-            //Since all protocol packets are encapsulated in the IP datagram
-            //so we start by parsing the IP header and see what protocol data
-            //is being carried by it
-            IPHeader ipHeader = new IPHeader(byteData, nReceived);
-
             bool Process = true;
             bool OLDI_Check_Requested = false;
             bool Inhibit_Due_To_Not_Valid_FMTP = false;
-            IPAddress Partner_Address = IPAddress.Parse(Partner_IP);
+            IPAddress Partner_Address;
+            Common_Header_Data ipHeader;
 
-            ////////////////////////////////////////////////////////////////////////////
-            // Here check if OLDI partner IP address and Port number have been defined
-            // If so then check that only applicable OLDI data is processed and rest ignored.
-            // If no data is provided then process all data
-            if ((Partner_IP.Length > 0) && (Partner_Port.Length > 0))
+            // In IPV6 there is no header when using raw socket. So, lets handle it.
+            if (Is_IPV6)
             {
-                Process = false;
-                OLDI_Check_Requested = true;
+                Process = true;
+            }
+            else
+            {
+                //Since all protocol packets are encapsulated in the IP datagram
+                //so we start by parsing the IP header and see what protocol data
+                //is being carried by it
+                IPHeader_IPV4 ipHeader_IPV4 = new IPHeader_IPV4(byteData, nReceived);
 
-                // First check if this is TCP
-                if ((ipHeader.ProtocolType == Protocol.TCP))
+                Process = true;
+                OLDI_Check_Requested = false;
+                Inhibit_Due_To_Not_Valid_FMTP = false;
+                Partner_Address = IPAddress.Parse(Partner_IP);
+
+                ////////////////////////////////////////////////////////////////////////////
+                // Here check if OLDI partner IP address and Port number have been defined
+                // If so then check that only applicable OLDI data is processed and rest ignored.
+                // If no data is provided then process all data
+                if ((Partner_IP != null) && (Partner_Port != null))
                 {
-                    // Only process data going between two partners
-                    if ((Local_Interface_Address == ipHeader.SourceAddress.ToString()) && (Partner_Address.ToString() == ipHeader.DestinationAddress.ToString()))
+                    Partner_Address = IPAddress.Parse(Partner_IP);
+
+                    Process = false;
+                    OLDI_Check_Requested = true;
+
+                    // First check if this is TCP
+                    if ((ipHeader_IPV4.ProtocolType == Protocol.TCP))
                     {
-                        Process = true;
-                    }
-                    else if ((Partner_Address.ToString() == ipHeader.SourceAddress.ToString()) && (Local_Interface_Address.ToString() == ipHeader.DestinationAddress.ToString()))
-                    {
-                        Process = true;
+                        // Only process data going between two partners
+                        if ((Local_Interface_Address == ipHeader_IPV4.SourceAddress.ToString()) && (Partner_Address.ToString() == ipHeader_IPV4.DestinationAddress.ToString()))
+                        {
+                            Process = true;
+                        }
+                        else if ((Partner_Address.ToString() == ipHeader_IPV4.SourceAddress.ToString()) && (Local_Interface_Address.ToString() == ipHeader_IPV4.DestinationAddress.ToString()))
+                        {
+                            Process = true;
+                        }
                     }
                 }
             }
 
+
             if (Process)
             {
-                if (OLDI_Check_Requested == false)
-                {
-                    TreeNode ipNode = MakeIPTreeNode(ipHeader);
-                    rootNode.Nodes.Add(ipNode);
-                }
-
                 //Now according to the protocol being carried by the IP datagram we parse 
                 //the data field of the datagram
                 switch (ipHeader.ProtocolType)
@@ -316,46 +341,14 @@ namespace OLDI_To_ETIC_Sender
                         Destination = Properties.Settings.Default.P_ID4;
 
                     rootNode.Text = Date_Time + ": " + Source + "  ->  " + Destination;
-                    
+
                     //Thread safe adding of the nodes
                     treeView.Invoke(addTreeNode, new object[] { rootNode });
                 }
             }
         }
 
-        //Helper function which returns the information contained in the IP header as a
-        //tree node
-        private TreeNode MakeIPTreeNode(IPHeader ipHeader)
-        {
-            TreeNode ipNode = new TreeNode();
 
-            ipNode.Text = "IP";
-            ipNode.Nodes.Add("Ver: " + ipHeader.Version);
-            ipNode.Nodes.Add("Header Length: " + ipHeader.HeaderLength);
-            ipNode.Nodes.Add("Differntiated Services: " + ipHeader.DifferentiatedServices);
-            ipNode.Nodes.Add("Total Length: " + ipHeader.TotalLength);
-            ipNode.Nodes.Add("Identification: " + ipHeader.Identification);
-            ipNode.Nodes.Add("Flags: " + ipHeader.Flags);
-            ipNode.Nodes.Add("Fragmentation Offset: " + ipHeader.FragmentationOffset);
-            ipNode.Nodes.Add("Time to live: " + ipHeader.TTL);
-            switch (ipHeader.ProtocolType)
-            {
-                case Protocol.TCP:
-                    ipNode.Nodes.Add("Protocol: " + "TCP");
-                    break;
-                case Protocol.UDP:
-                    ipNode.Nodes.Add("Protocol: " + "UDP");
-                    break;
-                case Protocol.Unknown:
-                    ipNode.Nodes.Add("Protocol: " + "Unknown");
-                    break;
-            }
-            ipNode.Nodes.Add("Checksum: " + ipHeader.Checksum);
-            ipNode.Nodes.Add("Source: " + ipHeader.SourceAddress.ToString());
-            ipNode.Nodes.Add("Destination: " + ipHeader.DestinationAddress.ToString());
-
-            return ipNode;
-        }
 
         //Helper function which returns the information contained in the TCP header as a
         //tree node

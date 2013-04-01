@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace OLDI_To_ETIC_Sender
 {
-    public class IPHeader
+    public class IPHeader_V4
     {
         //IP Header fields
         private byte byVersionAndHeaderLength;   //Eight bits for version and header length
@@ -28,7 +28,7 @@ namespace OLDI_To_ETIC_Sender
         private byte[] byIPData = new byte[4096];  //Data carried by the datagram
 
 
-        public IPHeader(byte[] byBuffer, int nReceived)
+        public IPHeader_V4(byte[] byBuffer, int nReceived)
         {
 
             try
@@ -187,7 +187,7 @@ namespace OLDI_To_ETIC_Sender
             }
         }
 
-        public Protocol ProtocolType
+        public Common_IP_Utils.Protocol ProtocolType
         {
             get
             {
@@ -195,15 +195,15 @@ namespace OLDI_To_ETIC_Sender
                 //of the datagram
                 if (byProtocol == 6)        //A value of six represents the TCP protocol
                 {
-                    return Protocol.TCP;
+                    return Common_IP_Utils.Protocol.TCP;
                 }
                 else if (byProtocol == 17)  //Seventeen for UDP
                 {
-                    return Protocol.UDP;
+                    return Common_IP_Utils.Protocol.UDP;
                 }
                 else
                 {
-                    return Protocol.Unknown;
+                    return Common_IP_Utils.Protocol.Unknown;
                 }
             }
         }

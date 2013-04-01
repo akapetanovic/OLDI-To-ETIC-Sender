@@ -113,7 +113,7 @@
     <Compile Include="OLDI Forwarder\FormOldiPartners.Designer.cs">
       <DependentUpon>FormOldiPartners.cs</DependentUpon>
     </Compile>
-    <Compile Include="OLDI Forwarder\IPHeader.cs" />
+    <Compile Include="OLDI Forwarder\IPHeader_IPV4.cs" />
     <Compile Include="OLDI Forwarder\DNSHeader.cs" />
     <Compile Include="OLDI Forwarder\TCPHeader.cs" />
     <Compile Include="OLDI Forwarder\UDPHeader.cs" />
