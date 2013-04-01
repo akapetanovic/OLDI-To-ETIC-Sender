@@ -41,6 +41,9 @@
             this.textBoxP_Port2 = new System.Windows.Forms.TextBox();
             this.textBoxP_IP2 = new System.Windows.Forms.TextBox();
             this.textBoxP_ID2 = new System.Windows.Forms.TextBox();
+            this.textBoxP_Port4 = new System.Windows.Forms.TextBox();
+            this.textBoxP_IP4 = new System.Windows.Forms.TextBox();
+            this.textBoxP_ID4 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBoxP_ID1
@@ -97,7 +100,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(239, 103);
+            this.button1.Location = new System.Drawing.Point(239, 129);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(68, 23);
             this.button1.TabIndex = 6;
@@ -151,11 +154,35 @@
             this.textBoxP_ID2.TabIndex = 10;
             this.textBoxP_ID2.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
             // 
+            // textBoxP_Port4
+            // 
+            this.textBoxP_Port4.Location = new System.Drawing.Point(239, 103);
+            this.textBoxP_Port4.Name = "textBoxP_Port4";
+            this.textBoxP_Port4.Size = new System.Drawing.Size(68, 20);
+            this.textBoxP_Port4.TabIndex = 15;
+            // 
+            // textBoxP_IP4
+            // 
+            this.textBoxP_IP4.Location = new System.Drawing.Point(59, 103);
+            this.textBoxP_IP4.Name = "textBoxP_IP4";
+            this.textBoxP_IP4.Size = new System.Drawing.Size(171, 20);
+            this.textBoxP_IP4.TabIndex = 14;
+            // 
+            // textBoxP_ID4
+            // 
+            this.textBoxP_ID4.Location = new System.Drawing.Point(12, 103);
+            this.textBoxP_ID4.Name = "textBoxP_ID4";
+            this.textBoxP_ID4.Size = new System.Drawing.Size(41, 20);
+            this.textBoxP_ID4.TabIndex = 13;
+            // 
             // OldiPartners
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(315, 132);
+            this.ClientSize = new System.Drawing.Size(315, 162);
+            this.Controls.Add(this.textBoxP_Port4);
+            this.Controls.Add(this.textBoxP_IP4);
+            this.Controls.Add(this.textBoxP_ID4);
             this.Controls.Add(this.textBoxP_Port2);
             this.Controls.Add(this.textBoxP_IP2);
             this.Controls.Add(this.textBoxP_ID2);
@@ -192,5 +219,8 @@
         private System.Windows.Forms.TextBox textBoxP_Port2;
         private System.Windows.Forms.TextBox textBoxP_IP2;
         private System.Windows.Forms.TextBox textBoxP_ID2;
+        private System.Windows.Forms.TextBox textBoxP_Port4;
+        private System.Windows.Forms.TextBox textBoxP_IP4;
+        private System.Windows.Forms.TextBox textBoxP_ID4;
     }
 }

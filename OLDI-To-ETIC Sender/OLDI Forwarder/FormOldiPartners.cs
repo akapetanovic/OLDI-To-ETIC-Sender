@@ -61,12 +61,17 @@ namespace OLDI_To_ETIC_Sender
             Properties.Settings.Default.P_ID1 = this.textBoxP_ID1.Text;
             Properties.Settings.Default.P_ID2 = this.textBoxP_ID2.Text;
             Properties.Settings.Default.P_ID3 = this.textBoxP_ID3.Text;
+            Properties.Settings.Default.P_ID4 = this.textBoxP_ID4.Text;
             Properties.Settings.Default.P_ADDR1 = this.textBoxP_IP1.Text;
             Properties.Settings.Default.P_ADDR2 = this.textBoxP_IP2.Text;
             Properties.Settings.Default.P_ADDR3 = this.textBoxP_IP3.Text;
+            Properties.Settings.Default.P_ADDR4 = this.textBoxP_IP4.Text;
             Properties.Settings.Default.P_PORT1 = this.textBoxP_Port1.Text;
             Properties.Settings.Default.P_PORT2 = this.textBoxP_Port2.Text;
             Properties.Settings.Default.P_PORT3 = this.textBoxP_Port3.Text;
+            Properties.Settings.Default.P_PORT4 = this.textBoxP_Port4.Text;
+
+            Properties.Settings.Default.Save();
         }
 
         private void OldiPartners_Load(object sender, EventArgs e)
@@ -74,12 +79,15 @@ namespace OLDI_To_ETIC_Sender
             this.textBoxP_ID1.Text = Properties.Settings.Default.P_ID1;
             this.textBoxP_ID2.Text = Properties.Settings.Default.P_ID2;
             this.textBoxP_ID3.Text = Properties.Settings.Default.P_ID3;
+            this.textBoxP_ID4.Text = Properties.Settings.Default.P_ID4;
             this.textBoxP_IP1.Text = Properties.Settings.Default.P_ADDR1;
             this.textBoxP_IP2.Text = Properties.Settings.Default.P_ADDR2;
             this.textBoxP_IP3.Text = Properties.Settings.Default.P_ADDR3;
+            this.textBoxP_IP4.Text = Properties.Settings.Default.P_ADDR4;
             this.textBoxP_Port1.Text = Properties.Settings.Default.P_PORT1;
             this.textBoxP_Port2.Text = Properties.Settings.Default.P_PORT2;
             this.textBoxP_Port3.Text = Properties.Settings.Default.P_PORT3;
+            this.textBoxP_Port4.Text = Properties.Settings.Default.P_PORT4;
         }
     }
 }

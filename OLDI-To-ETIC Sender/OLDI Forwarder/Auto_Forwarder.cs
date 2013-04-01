@@ -293,8 +293,30 @@ namespace OLDI_To_ETIC_Sender
                 {
                     AddTreeNode addTreeNode = new AddTreeNode(OnAddTreeNode);
                     string Date_Time = DateTime.Now.ToShortDateString() + " / " + DateTime.Now.ToLongTimeString();
-                    rootNode.Text = Date_Time + ": " + ipHeader.SourceAddress.ToString() + "  ->  " +
-                        ipHeader.DestinationAddress.ToString();
+
+                    string Source = ipHeader.SourceAddress.ToString();
+                    string Destination = ipHeader.DestinationAddress.ToString();
+
+                    if (Source == Properties.Settings.Default.P_ADDR1)
+                        Source = Properties.Settings.Default.P_ID1;
+                    else if (Source == Properties.Settings.Default.P_ADDR2)
+                        Source = Properties.Settings.Default.P_ID2;
+                    else if (Source == Properties.Settings.Default.P_ADDR3)
+                        Source = Properties.Settings.Default.P_ID3;
+                    else if (Source == Properties.Settings.Default.P_ADDR4)
+                        Source = Properties.Settings.Default.P_ID4;
+
+                    if (Destination == Properties.Settings.Default.P_ADDR1)
+                        Destination = Properties.Settings.Default.P_ID1;
+                    else if (Source == Properties.Settings.Default.P_ADDR2)
+                        Destination = Properties.Settings.Default.P_ID2;
+                    else if (Destination == Properties.Settings.Default.P_ADDR3)
+                        Destination = Properties.Settings.Default.P_ID3;
+                    else if (Destination == Properties.Settings.Default.P_ADDR4)
+                        Destination = Properties.Settings.Default.P_ID4;
+
+                    rootNode.Text = Date_Time + ": " + Source + "  ->  " + Destination;
+                    
                     //Thread safe adding of the nodes
                     treeView.Invoke(addTreeNode, new object[] { rootNode });
                 }
@@ -363,10 +385,14 @@ namespace OLDI_To_ETIC_Sender
             else
             {
                 tcpNode.Text = "OLDI";
-                tcpNode.Nodes.Add("Msg Version: " + Parsed_Msg.version);
-                tcpNode.Nodes.Add("Msg Length: " + Parsed_Msg.msg_length + " bytes");
-                tcpNode.Nodes.Add("Msg Type: " + Parsed_Msg.msg_type);
-                tcpNode.Nodes.Add("Msg Content: " + Parsed_Msg.msg_content);
+                if (Properties.Settings.Default.Msg_Version)
+                    tcpNode.Nodes.Add("Msg Version: " + Parsed_Msg.version);
+                if (Properties.Settings.Default.Msg_Length)
+                    tcpNode.Nodes.Add("Msg Length: " + Parsed_Msg.msg_length + " bytes");
+                if (Properties.Settings.Default.Msg_Type)
+                    tcpNode.Nodes.Add("Msg Type: " + Parsed_Msg.msg_type);
+                if (Properties.Settings.Default.Msg_Content)
+                    tcpNode.Nodes.Add("Msg Content: " + Parsed_Msg.msg_content);
             }
 
             return tcpNode;
@@ -521,6 +547,11 @@ namespace OLDI_To_ETIC_Sender
 
             Partner_IP = this.comboBoxPartnerIP.Text;
             Partner_Port = this.comboBoxP_Port.Text;
+        }
+
+        private void toolsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
