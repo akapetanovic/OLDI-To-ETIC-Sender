@@ -1,6 +1,6 @@
 ﻿namespace OLDI_To_ETIC_Sender.OLDI_Forwarder
 {
-    partial class DisplayItmes
+    partial class DisplayItems
     {
         /// <summary>
         /// Required designer variable.

@@ -18,10 +18,10 @@
       <Value Profile="(Default)">8500</Value>
     </Setting>
     <Setting Name="Sender" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ZACC</Value>
+      <Value Profile="(Default)">N/A</Value>
     </Setting>
     <Setting Name="Receiver" Type="System.String" Scope="User">
-      <Value Profile="(Default)">LQSB</Value>
+      <Value Profile="(Default)">N/A</Value>
     </Setting>
     <Setting Name="Etic_Dir" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Etic\batch</Value>

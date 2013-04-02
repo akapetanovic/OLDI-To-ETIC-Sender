@@ -85,7 +85,7 @@ namespace OLDI_To_ETIC_Sender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ZACC")]
+        [global::System.Configuration.DefaultSettingValueAttribute("N/A")]
         public string Sender {
             get {
                 return ((string)(this["Sender"]));
@@ -97,7 +97,7 @@ namespace OLDI_To_ETIC_Sender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("LQSB")]
+        [global::System.Configuration.DefaultSettingValueAttribute("N/A")]
         public string Receiver {
             get {
                 return ((string)(this["Receiver"]));

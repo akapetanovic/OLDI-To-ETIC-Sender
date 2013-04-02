@@ -132,13 +132,13 @@ namespace OLDI_To_ETIC_Sender
 
             My_Forwarder.Show();
             My_Forwarder.Visible = false;
-           
+            ImportData();
         }
 
         private void UpdateSettingParametersDisplay()
         {
             GlobalDataAndSettings.Sender = Properties.Settings.Default.Sender;
-            GlobalDataAndSettings.Data_Dir = Properties.Settings.Default.Receiver;
+            GlobalDataAndSettings.Receiver = Properties.Settings.Default.Receiver;
             GlobalDataAndSettings.Etic_Dir = Properties.Settings.Default.Etic_Dir;
             GlobalDataAndSettings.Data_Dir = Properties.Settings.Default.Data_Dir;
             

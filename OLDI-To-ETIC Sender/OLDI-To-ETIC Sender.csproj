@@ -14,7 +14,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\bhdca\Documents\Shared\</PublishUrl>
+    <PublishUrl>C:\Users\AMER\Documents\Projects\OLDI-To-ETIC-Sender\OLDI-To-ETIC Sender\Release\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,7 +25,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -59,7 +59,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -79,7 +79,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="ACT.cs" />
+    <Compile Include="OLDI\ACT.cs" />
     <Compile Include="OLDI Forwarder\Auto_Forwarder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,17 +100,18 @@
       <DependentUpon>Help.cs</DependentUpon>
     </Compile>
     <Compile Include="OLDI Forwarder\Bit_Ops.cs" />
-    <Compile Include="OLDI Forwarder\DisplayItmes.cs">
+    <Compile Include="OLDI Forwarder\DisplayItems.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OLDI Forwarder\DisplayItmes.Designer.cs">
-      <DependentUpon>DisplayItmes.cs</DependentUpon>
+    <Compile Include="OLDI Forwarder\DisplayItems.Designer.cs">
+      <DependentUpon>DisplayItems.cs</DependentUpon>
     </Compile>
     <Compile Include="OLDI Forwarder\FMTP_Parser.cs" />
     <Compile Include="OLDI Forwarder\IPHeader_IPV4.cs" />
     <Compile Include="OLDI Forwarder\DNSHeader.cs" />
     <Compile Include="OLDI Forwarder\TCPHeader.cs" />
     <Compile Include="OLDI Forwarder\UDPHeader.cs" />
+    <Compile Include="OLDI\OLDI_Decoder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs">
@@ -131,8 +132,8 @@
     <EmbeddedResource Include="Help.resx">
       <DependentUpon>Help.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OLDI Forwarder\DisplayItmes.resx">
-      <DependentUpon>DisplayItmes.cs</DependentUpon>
+    <EmbeddedResource Include="OLDI Forwarder\DisplayItems.resx">
+      <DependentUpon>DisplayItems.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

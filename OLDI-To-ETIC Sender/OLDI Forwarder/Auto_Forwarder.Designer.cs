@@ -43,9 +43,9 @@
             this.labelSendingUnit = new System.Windows.Forms.Label();
             this.textBoxSourcePort = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButtonClient = new System.Windows.Forms.RadioButton();
             this.radioButtonServer = new System.Windows.Forms.RadioButton();
+            this.radioButtonClient = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,12 +100,12 @@
             // 
             // treeView
             // 
-            this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView.Location = new System.Drawing.Point(12, 106);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(538, 527);
+            this.treeView.Size = new System.Drawing.Size(919, 527);
             this.treeView.TabIndex = 33;
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
             // 
@@ -144,18 +144,18 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(12, 78);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(120, 13);
+            this.label13.Size = new System.Drawing.Size(115, 13);
             this.label13.TabIndex = 47;
-            this.label13.Text = "Receiving (Server) Unit:";
+            this.label13.Text = "Receiving (Client) Unit:";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(12, 55);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(109, 13);
+            this.label12.Size = new System.Drawing.Size(114, 13);
             this.label12.TabIndex = 46;
-            this.label12.Text = "Sending (Client) Unit :";
+            this.label12.Text = "Sending (Server) Unit :";
             // 
             // labelReceivingUnit
             // 
@@ -195,6 +195,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Auto Forward to ETIC (batch mode)";
             // 
+            // radioButtonServer
+            // 
+            this.radioButtonServer.AutoSize = true;
+            this.radioButtonServer.Location = new System.Drawing.Point(6, 42);
+            this.radioButtonServer.Name = "radioButtonServer";
+            this.radioButtonServer.Size = new System.Drawing.Size(56, 17);
+            this.radioButtonServer.TabIndex = 2;
+            this.radioButtonServer.TabStop = true;
+            this.radioButtonServer.Text = "Server";
+            this.radioButtonServer.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonClient
+            // 
+            this.radioButtonClient.AutoSize = true;
+            this.radioButtonClient.Location = new System.Drawing.Point(6, 65);
+            this.radioButtonClient.Name = "radioButtonClient";
+            this.radioButtonClient.Size = new System.Drawing.Size(51, 17);
+            this.radioButtonClient.TabIndex = 1;
+            this.radioButtonClient.TabStop = true;
+            this.radioButtonClient.Text = "Cilent";
+            this.radioButtonClient.UseVisualStyleBackColor = true;
+            // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
@@ -207,33 +229,11 @@
             this.radioButton1.Text = "None";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // radioButtonClient
-            // 
-            this.radioButtonClient.AutoSize = true;
-            this.radioButtonClient.Location = new System.Drawing.Point(6, 42);
-            this.radioButtonClient.Name = "radioButtonClient";
-            this.radioButtonClient.Size = new System.Drawing.Size(51, 17);
-            this.radioButtonClient.TabIndex = 1;
-            this.radioButtonClient.TabStop = true;
-            this.radioButtonClient.Text = "Cilent";
-            this.radioButtonClient.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonServer
-            // 
-            this.radioButtonServer.AutoSize = true;
-            this.radioButtonServer.Location = new System.Drawing.Point(6, 65);
-            this.radioButtonServer.Name = "radioButtonServer";
-            this.radioButtonServer.Size = new System.Drawing.Size(56, 17);
-            this.radioButtonServer.TabIndex = 2;
-            this.radioButtonServer.TabStop = true;
-            this.radioButtonServer.Text = "Server";
-            this.radioButtonServer.UseVisualStyleBackColor = true;
-            // 
             // Auto_Forwarder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 674);
+            this.ClientSize = new System.Drawing.Size(940, 674);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBoxSourcePort);
             this.Controls.Add(this.label13);

@@ -23,10 +23,10 @@
                 <value>8500</value>
             </setting>
             <setting name="Sender" serializeAs="String">
-                <value>N/A</value>
+                <value>ZACC</value>
             </setting>
             <setting name="Receiver" serializeAs="String">
-                <value>N/A</value>
+                <value>LQSB</value>
             </setting>
             <setting name="Etic_Dir" serializeAs="String">
                 <value>C:\Etic\batch</value>

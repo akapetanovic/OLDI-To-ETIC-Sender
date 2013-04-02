@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace OLDI_To_ETIC_Sender.OLDI_Forwarder
 {
-    public partial class DisplayItmes : Form
+    public partial class DisplayItems : Form
     {
-        public DisplayItmes()
+        public DisplayItems()
         {
             InitializeComponent();
         }

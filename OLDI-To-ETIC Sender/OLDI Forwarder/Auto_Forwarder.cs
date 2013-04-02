@@ -21,7 +21,6 @@ namespace OLDI_To_ETIC_Sender
 
         private delegate void AddTreeNode(TreeNode node);
 
-        string Partner_Port;
         bool Is_IPV6 = false;
 
         public Auto_Forwarder()
@@ -41,8 +40,8 @@ namespace OLDI_To_ETIC_Sender
             this.labelSendingUnit.Text = GlobalDataAndSettings.Sender;
             textBoxSourcePort.Text = Properties.Settings.Default.SourcePort;
 
-            this.radioButtonServer.Text = "Server" + " (" + GlobalDataAndSettings.Receiver + " )";
-            this.radioButtonClient.Text = "Client" + " (" + GlobalDataAndSettings.Sender + " )";
+            this.radioButtonServer.Text = "Server" + " (" + GlobalDataAndSettings.Sender + " )";
+            this.radioButtonClient.Text = "Client" + " (" + GlobalDataAndSettings.Receiver + " )";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -202,13 +201,14 @@ namespace OLDI_To_ETIC_Sender
 
                         if (tcpHeader.SourcePort == Properties.Settings.Default.SourcePort)
                         {
-                            Destination = Properties.Settings.Default.Sender;
-                            Source = Properties.Settings.Default.Receiver;
+                            Source = Properties.Settings.Default.Sender;
+                            Destination = Properties.Settings.Default.Receiver;
+
                         }
                         else
                         {
-                            Source = Properties.Settings.Default.Sender;
-                            Destination = Properties.Settings.Default.Receiver;
+                            Destination = Properties.Settings.Default.Sender;
+                            Source = Properties.Settings.Default.Receiver;
                         }
 
                         rootNode.Text = Date_Time + ": " + Source + "  ->  " + Destination;
@@ -216,17 +216,21 @@ namespace OLDI_To_ETIC_Sender
                         //Thread safe adding of the nodes
                         treeView.Invoke(addTreeNode, new object[] { rootNode });
 
-                        // Now check if Auto forward to ETIC is requested
-                        //
-                        // CLIENT DATA IS TO BE FORWARDED
-                        if (this.radioButtonClient.Checked && (Source == Properties.Settings.Default.Sender))
+                        // Only forward operational messages
+                        if (FMTP_Data.msg_type == FMTP_Parser.FMPT_Header_and_Data.Message_Type.Operational)
                         {
-
-                        }
-                        // SERVER DATA IS TO BE FORWARDED
-                        else if (this.radioButtonServer.Checked && Source == Properties.Settings.Default.Receiver)
-                        {
-
+                            // Now check if Auto forward to ETIC is requested
+                            //
+                            // CLIENT DATA IS TO BE FORWARDED
+                            if (this.radioButtonClient.Checked && (Source == Properties.Settings.Default.Receiver))
+                            {
+                                OLDI_Decoder.Decode_And_Forward(FMTP_Data.msg_content);
+                            }
+                            // SERVER DATA IS TO BE FORWARDED
+                            else if (this.radioButtonServer.Checked && Source == Properties.Settings.Default.Sender)
+                            {
+                                OLDI_Decoder.Decode_And_Forward(FMTP_Data.msg_content);
+                            }
                         }
                     }
                 }
