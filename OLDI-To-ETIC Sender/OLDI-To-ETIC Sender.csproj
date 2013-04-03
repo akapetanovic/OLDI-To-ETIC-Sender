@@ -79,7 +79,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="OLDI\ACT.cs" />
+    <Compile Include="OLDI\ABI_ACT.cs" />
     <Compile Include="OLDI Forwarder\Auto_Forwarder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +111,7 @@
     <Compile Include="OLDI Forwarder\DNSHeader.cs" />
     <Compile Include="OLDI Forwarder\TCPHeader.cs" />
     <Compile Include="OLDI Forwarder\UDPHeader.cs" />
+    <Compile Include="OLDI\ETIC_Forwarder.cs" />
     <Compile Include="OLDI\OLDI_Decoder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

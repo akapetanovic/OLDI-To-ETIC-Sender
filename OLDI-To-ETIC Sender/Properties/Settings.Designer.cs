@@ -130,5 +130,53 @@ namespace OLDI_To_ETIC_Sender.Properties {
                 this["Data_Dir"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Show_Operational {
+            get {
+                return ((bool)(this["Show_Operational"]));
+            }
+            set {
+                this["Show_Operational"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Show_Operator {
+            get {
+                return ((bool)(this["Show_Operator"]));
+            }
+            set {
+                this["Show_Operator"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Show_System {
+            get {
+                return ((bool)(this["Show_System"]));
+            }
+            set {
+                this["Show_System"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Show_Identification {
+            get {
+                return ((bool)(this["Show_Identification"]));
+            }
+            set {
+                this["Show_Identification"] = value;
+            }
+        }
     }
 }

@@ -51,7 +51,8 @@ namespace OLDI_To_ETIC_Sender
                 // Type_Of_Flight_IN,
             this.comboBoxTypeofFlight.Items[this.comboBoxTypeofFlight.SelectedIndex].ToString(),
                 // Equipment_Capability_And_Status_IN
-            this.comboBoxRVSMEQuiped.Items[this.comboBoxRVSMEQuiped.SelectedIndex].ToString());
+            this.comboBoxRVSMEQuiped.Items[this.comboBoxRVSMEQuiped.SelectedIndex].ToString(),
+            this.radioButtonABI.Checked);
 
             // Now send the data
             ACTtoSend.SendData();

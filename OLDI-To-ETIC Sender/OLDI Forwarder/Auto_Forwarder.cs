@@ -127,7 +127,7 @@ namespace OLDI_To_ETIC_Sender
                 int nReceived = mainSocket.EndReceive(ar);
 
                 //Analyze the bytes received...
-                ParseData(byteData, nReceived);
+                ParseAndForwardData(byteData, nReceived);
 
                 if (bContinueCapturing)
                 {
@@ -157,7 +157,10 @@ namespace OLDI_To_ETIC_Sender
             public ushort MessageLength;
         }
 
-        private void ParseData(byte[] byteData, int nReceived)
+        // Parses incomming message, determines IP version and then if the
+        // message is operational forwards it to Etic batch mode that will
+        // then forward messages the specified destination
+        private void ParseAndForwardData(byte[] byteData, int nReceived)
         {
             TreeNode rootNode = new TreeNode();
             Common_Header_Data ipHeader = new Common_Header_Data();
@@ -174,28 +177,28 @@ namespace OLDI_To_ETIC_Sender
             }
             else
             {
+                // In .NET for IPV6 no header data is provided
+                // so we just take in TCP part.
                 ipHeader.Data = byteData;
                 ipHeader.MessageLength = (ushort)nReceived;
                 ipHeader.ProtocolType = Protocol.TCP;
             }
 
+            // Only process TCP 
             if (ipHeader.ProtocolType == Protocol.TCP)
             {
                 TCPHeader tcpHeader = new TCPHeader(ipHeader.Data,//IPHeader.Data stores the data being carried by the IP datagram
                                                     ipHeader.MessageLength);//Length of the data field 
 
+                // Make sure the data is belongs to the FMTP specifed port (usually 8500)
                 if (tcpHeader.SourcePort == Properties.Settings.Default.SourcePort || tcpHeader.DestinationPort == Properties.Settings.Default.SourcePort)
                 {
-                    AddTreeNode addTreeNode = new AddTreeNode(OnAddTreeNode);
-                    string Date_Time = DateTime.Now.ToShortDateString() + " / " + DateTime.Now.ToLongTimeString();
-
+                    // Parse the data in order to determine data validity and message type
+                    //  { Operational, Operator, Identification, System }
                     FMTP_Parser.FMPT_Header_and_Data FMTP_Data = FMTP_Parser.FMTP_Msg_Parser(tcpHeader.Data);
 
                     if (FMTP_Data.Valid_FMTP_Data)
                     {
-                        TreeNode fmtpNode = MakeFMTPTreeNode(FMTP_Data);
-                        rootNode.Nodes.Add(fmtpNode);
-
                         string Source;
                         string Destination;
 
@@ -211,30 +214,46 @@ namespace OLDI_To_ETIC_Sender
                             Source = Properties.Settings.Default.Receiver;
                         }
 
-                        rootNode.Text = Date_Time + ": " + Source + "  ->  " + Destination;
-
-                        //Thread safe adding of the nodes
-                        treeView.Invoke(addTreeNode, new object[] { rootNode });
-
-                        // Only forward operational messages
-                        if (FMTP_Data.msg_type == FMTP_Parser.FMPT_Header_and_Data.Message_Type.Operational)
+                        switch (FMTP_Data.msg_type)
                         {
-                            // Now check if Auto forward to ETIC is requested
-                            //
-                            // CLIENT DATA IS TO BE FORWARDED
-                            if (this.radioButtonClient.Checked && (Source == Properties.Settings.Default.Receiver))
-                            {
-                                OLDI_Decoder.Decode_And_Forward(FMTP_Data.msg_content);
-                            }
-                            // SERVER DATA IS TO BE FORWARDED
-                            else if (this.radioButtonServer.Checked && Source == Properties.Settings.Default.Sender)
-                            {
-                                OLDI_Decoder.Decode_And_Forward(FMTP_Data.msg_content);
-                            }
+                            case FMTP_Parser.FMPT_Header_and_Data.Message_Type.Operational:
+
+                                // Check if Auto forward to ETIC is requested
+                                if (this.radioButtonClient.Checked && (Source == Properties.Settings.Default.Receiver))
+                                    ETIC_Forwarder.Forward_To_ETIC_Operational_Msg(FMTP_Data.msg_content);
+                                else if (this.radioButtonServer.Checked && Source == Properties.Settings.Default.Sender)
+                                    ETIC_Forwarder.Forward_To_ETIC_Operational_Msg(FMTP_Data.msg_content);
+
+                                if (Properties.Settings.Default.Show_Operational)
+                                    Build_Tree_View(rootNode, FMTP_Data, Source, Destination);
+                                break;
+                            case FMTP_Parser.FMPT_Header_and_Data.Message_Type.Identification:
+                                if (Properties.Settings.Default.Show_Identification)
+                                    Build_Tree_View(rootNode, FMTP_Data, Source, Destination);
+                                break;
+                            case FMTP_Parser.FMPT_Header_and_Data.Message_Type.Operator:
+                                if (Properties.Settings.Default.Show_Operator)
+                                    Build_Tree_View(rootNode, FMTP_Data, Source, Destination);
+                                break;
+                            case FMTP_Parser.FMPT_Header_and_Data.Message_Type.System:
+                                if (Properties.Settings.Default.Show_System)
+                                    Build_Tree_View(rootNode, FMTP_Data, Source, Destination);
+                                break;
                         }
                     }
                 }
             }
+        }
+
+        private void Build_Tree_View(TreeNode rootNode, FMTP_Parser.FMPT_Header_and_Data FMTP_Data, string Source, string Destination)
+        {
+            TreeNode fmtpNode = MakeFMTPTreeNode(FMTP_Data);
+            rootNode.Nodes.Add(fmtpNode);
+            AddTreeNode addTreeNode = new AddTreeNode(OnAddTreeNode);
+            string Date_Time = DateTime.Now.ToShortDateString() + " / " + DateTime.Now.ToLongTimeString();
+            rootNode.Text = Date_Time + ": " + Source + "  ->  " + Destination;
+            //Thread safe adding of the nodes
+            treeView.Invoke(addTreeNode, new object[] { rootNode });
         }
 
         //Helper function which returns the information contained in the TCP header as a
@@ -358,6 +377,12 @@ namespace OLDI_To_ETIC_Sender
         {
             Properties.Settings.Default.SourcePort = textBoxSourcePort.Text;
             Properties.Settings.Default.Save();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DisplayItems DI = new DisplayItems();
+            DI.Show();
         }
     }
 }

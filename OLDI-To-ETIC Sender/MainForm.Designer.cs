@@ -53,7 +53,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +72,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.lblDataDirectory = new System.Windows.Forms.Label();
             this.checkBoxResetFields = new System.Windows.Forms.CheckBox();
+            this.radioButtonABI = new System.Windows.Forms.RadioButton();
+            this.radioButtonACT = new System.Windows.Forms.RadioButton();
             this.tabABI.SuspendLayout();
             this.tabPageACT.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -82,7 +83,6 @@
             // tabABI
             // 
             this.tabABI.Controls.Add(this.tabPageACT);
-            this.tabABI.Controls.Add(this.tabPage2);
             this.tabABI.Location = new System.Drawing.Point(12, 88);
             this.tabABI.Name = "tabABI";
             this.tabABI.SelectedIndex = 0;
@@ -92,6 +92,8 @@
             // tabPageACT
             // 
             this.tabPageACT.BackColor = System.Drawing.Color.Silver;
+            this.tabPageACT.Controls.Add(this.radioButtonACT);
+            this.tabPageACT.Controls.Add(this.radioButtonABI);
             this.tabPageACT.Controls.Add(this.button1);
             this.tabPageACT.Controls.Add(this.btnSendACT);
             this.tabPageACT.Controls.Add(this.groupBox1);
@@ -100,13 +102,13 @@
             this.tabPageACT.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageACT.Size = new System.Drawing.Size(449, 445);
             this.tabPageACT.TabIndex = 0;
-            this.tabPageACT.Text = "ACT";
+            this.tabPageACT.Text = "ABI/ACT";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(207, 414);
+            this.button1.Location = new System.Drawing.Point(235, 414);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(228, 23);
+            this.button1.Size = new System.Drawing.Size(200, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Clear";
             this.button1.UseVisualStyleBackColor = true;
@@ -117,7 +119,7 @@
             this.btnSendACT.Enabled = false;
             this.btnSendACT.Location = new System.Drawing.Point(7, 414);
             this.btnSendACT.Name = "btnSendACT";
-            this.btnSendACT.Size = new System.Drawing.Size(193, 23);
+            this.btnSendACT.Size = new System.Drawing.Size(143, 23);
             this.btnSendACT.TabIndex = 1;
             this.btnSendACT.Text = "Send";
             this.btnSendACT.UseVisualStyleBackColor = true;
@@ -374,16 +376,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Aircraft Identification";
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(449, 445);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "ABI";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -551,6 +543,29 @@
             this.checkBoxResetFields.Text = "Reset fields after send";
             this.checkBoxResetFields.UseVisualStyleBackColor = true;
             // 
+            // radioButtonABI
+            // 
+            this.radioButtonABI.AutoSize = true;
+            this.radioButtonABI.Location = new System.Drawing.Point(156, 408);
+            this.radioButtonABI.Name = "radioButtonABI";
+            this.radioButtonABI.Size = new System.Drawing.Size(42, 17);
+            this.radioButtonABI.TabIndex = 3;
+            this.radioButtonABI.TabStop = true;
+            this.radioButtonABI.Text = "ABI";
+            this.radioButtonABI.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonACT
+            // 
+            this.radioButtonACT.AutoSize = true;
+            this.radioButtonACT.Checked = true;
+            this.radioButtonACT.Location = new System.Drawing.Point(156, 424);
+            this.radioButtonACT.Name = "radioButtonACT";
+            this.radioButtonACT.Size = new System.Drawing.Size(46, 17);
+            this.radioButtonACT.TabIndex = 4;
+            this.radioButtonACT.TabStop = true;
+            this.radioButtonACT.Text = "ACT";
+            this.radioButtonACT.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -573,6 +588,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabABI.ResumeLayout(false);
             this.tabPageACT.ResumeLayout(false);
+            this.tabPageACT.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -588,7 +604,6 @@
         private System.Windows.Forms.TabPage tabPageACT;
         private System.Windows.Forms.Button btnSendACT;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox textBoxSSR_ModeandCode;
         private System.Windows.Forms.TextBox textBoxTimeAtCOP;
         private System.Windows.Forms.TextBox textBoxACID;
@@ -629,6 +644,8 @@
         private System.Windows.Forms.Label lblDataDirectory;
         private System.Windows.Forms.CheckBox checkBoxResetFields;
         private System.Windows.Forms.ToolStripMenuItem forwarderToolStripMenuItem;
+        private System.Windows.Forms.RadioButton radioButtonACT;
+        private System.Windows.Forms.RadioButton radioButtonABI;
     }
 }
 

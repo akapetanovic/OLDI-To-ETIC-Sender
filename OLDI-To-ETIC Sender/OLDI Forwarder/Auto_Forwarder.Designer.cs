@@ -46,6 +46,7 @@
             this.radioButtonServer = new System.Windows.Forms.RadioButton();
             this.radioButtonClient = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -229,11 +230,22 @@
             this.radioButton1.Text = "None";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(553, 17);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(72, 34);
+            this.button5.TabIndex = 50;
+            this.button5.Text = "Display Settings";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Auto_Forwarder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 674);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBoxSourcePort);
             this.Controls.Add(this.label13);
@@ -283,5 +295,6 @@
         private System.Windows.Forms.RadioButton radioButtonServer;
         private System.Windows.Forms.RadioButton radioButtonClient;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Button button5;
     }
 }
