@@ -56,7 +56,7 @@ namespace OLDI_To_ETIC_Sender
             }
 
             if (Data_Out.Valid_FMTP_Data)
-                Data_Out.msg_content = Data_Out.msg_content + System.Text.Encoding.ASCII.GetString(FMTP_Msh, 5, Result - 1);
+                Data_Out.msg_content = Data_Out.msg_content + System.Text.Encoding.ASCII.GetString(FMTP_Msh, 5, Result - 5);
 
             return Data_Out;
         }

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<configuration>
+<configSections>
+    <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+        <section name="OLDI_To_ETIC_Sender.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+    </sectionGroup>
+</configSections>
+<startup><supportedRuntime version="v2.0.50727" sku="Client"/></startup><userSettings>
+        <OLDI_To_ETIC_Sender.Properties.Settings>
+            <setting name="Msg_Version" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Msg_Type" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Msg_Length" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Msg_Content" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="SourcePort" serializeAs="String">
+                <value>8500</value>
+            </setting>
+            <setting name="Sender" serializeAs="String">
+                <value>N/A</value>
+            </setting>
+            <setting name="Receiver" serializeAs="String">
+                <value>N/A</value>
+            </setting>
+            <setting name="Etic_Dir" serializeAs="String">
+                <value>C:\Etic\batch</value>
+            </setting>
+            <setting name="Data_Dir" serializeAs="String">
+                <value>C:\Etic\batch</value>
+            </setting>
+            <setting name="Show_Operational" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Show_Operator" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Show_System" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Show_Identification" serializeAs="String">
+                <value>True</value>
+            </setting>
+        </OLDI_To_ETIC_Sender.Properties.Settings>
+    </userSettings>
+</configuration>

@@ -23,16 +23,28 @@
                 <value>8500</value>
             </setting>
             <setting name="Sender" serializeAs="String">
-                <value>ZACC</value>
+                <value>N/A</value>
             </setting>
             <setting name="Receiver" serializeAs="String">
-                <value>LQSB</value>
+                <value>N/A</value>
             </setting>
             <setting name="Etic_Dir" serializeAs="String">
                 <value>C:\Etic\batch</value>
             </setting>
             <setting name="Data_Dir" serializeAs="String">
                 <value>C:\Etic\batch</value>
+            </setting>
+            <setting name="Show_Operational" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Show_Operator" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Show_System" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Show_Identification" serializeAs="String">
+                <value>True</value>
             </setting>
         </OLDI_To_ETIC_Sender.Properties.Settings>
     </userSettings>
