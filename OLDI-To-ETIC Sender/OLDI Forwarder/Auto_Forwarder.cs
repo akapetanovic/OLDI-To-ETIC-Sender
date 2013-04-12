@@ -218,11 +218,23 @@ namespace OLDI_To_ETIC_Sender
                         {
                             case FMTP_Parser.FMPT_Header_and_Data.Message_Type.Operational:
 
-                                // Check if Auto forward to ETIC is requested
-                                if (this.radioButtonClient.Checked && (Source == Properties.Settings.Default.Receiver))
-                                    ETIC_Forwarder.Forward_To_ETIC_Operational_Msg(FMTP_Data.msg_content);
-                                else if (this.radioButtonServer.Checked && Source == Properties.Settings.Default.Sender)
-                                    ETIC_Forwarder.Forward_To_ETIC_Operational_Msg(FMTP_Data.msg_content);
+                                bool Filter_By_Sender_Passed = true;
+                                
+                                // Check if fiter by sender name is enabled
+                                if (this.checkBoxFilterBySender.Checked)
+                                {
+                                    if (OLDI_Decoder.Sender_Name(FMTP_Data.msg_content) != Properties.Settings.Default.Sender)
+                                        Filter_By_Sender_Passed = false;
+                                }
+
+                                if (Filter_By_Sender_Passed)
+                                {
+                                    // Check if Auto forward to ETIC is requested
+                                    if (this.radioButtonClient.Checked && (Source == Properties.Settings.Default.Receiver))
+                                        ETIC_Forwarder.Forward_To_ETIC_Operational_Msg(FMTP_Data.msg_content);
+                                    else if (this.radioButtonServer.Checked && Source == Properties.Settings.Default.Sender)
+                                        ETIC_Forwarder.Forward_To_ETIC_Operational_Msg(FMTP_Data.msg_content);
+                                }
 
                                 if (Properties.Settings.Default.Show_Operational)
                                     Build_Tree_View(rootNode, FMTP_Data, Source, Destination);

@@ -47,6 +47,7 @@
             this.radioButtonClient = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
+            this.checkBoxFilterBySender = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -186,6 +187,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxFilterBySender);
             this.groupBox1.Controls.Add(this.radioButtonServer);
             this.groupBox1.Controls.Add(this.radioButtonClient);
             this.groupBox1.Controls.Add(this.radioButton1);
@@ -239,6 +241,18 @@
             this.button5.Text = "Display Settings";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // checkBoxFilterBySender
+            // 
+            this.checkBoxFilterBySender.AutoSize = true;
+            this.checkBoxFilterBySender.Checked = true;
+            this.checkBoxFilterBySender.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxFilterBySender.Location = new System.Drawing.Point(141, 69);
+            this.checkBoxFilterBySender.Name = "checkBoxFilterBySender";
+            this.checkBoxFilterBySender.Size = new System.Drawing.Size(110, 17);
+            this.checkBoxFilterBySender.TabIndex = 51;
+            this.checkBoxFilterBySender.Text = "Filter by SENDER";
+            this.checkBoxFilterBySender.UseVisualStyleBackColor = true;
             // 
             // Auto_Forwarder
             // 
@@ -296,5 +310,6 @@
         private System.Windows.Forms.RadioButton radioButtonClient;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.CheckBox checkBoxFilterBySender;
     }
 }
