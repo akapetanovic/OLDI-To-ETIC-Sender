@@ -18,10 +18,10 @@ namespace OLDI_To_ETIC_Sender
             bool SENDER_FOUND = false;
             foreach (string S in words)
             {
-                if (S == "SENDER")
+                if (S == "FAC")
                     SENDER_FOUND = true;
 
-                if (SENDER_FOUND && S != "SENDER")
+                if (SENDER_FOUND && S != "FAC")
                 {
                     if (S.Length > 1)
                     {
